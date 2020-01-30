@@ -55,7 +55,7 @@ While investigating the connector behavior, we found that a command shell reads 
 1. [Create semiColonToken Class, implement into Tokenizer](https://github.com/cs100/assignment-jorr/issues/10)
 1. [Test program for proper ";" functionality](https://github.com/cs100/assignment-jorr/issues/11)
 1. [Test program with multiple connectors (both && and ;)](https://github.com/cs100/assignment-jorr/issues/12)
-1. [Create orToken Class, implement into Tokenizer] (https://github.com/cs100/assignment-jorr/issues/13)
+1. [Create orToken Class, implement into Tokenizer](https://github.com/cs100/assignment-jorr/issues/13)
 1. [Test for proper "||" functionality](https://github.com/cs100/assignment-jorr/issues/14)
 1. [Testing for multiple connectors, arguments, flags](https://github.com/cs100/assignment-jorr/issues/15)
 1. [Finalize Unit Tests](https://github.com/cs100/assignment-jorr/issues/16)
