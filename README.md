@@ -7,7 +7,7 @@ Robert Rivera SID: 862086500
 Our program will accomplish the following: print a command prompt, read in a line of command(s) and connector(s) from standard input, execute the appropriate commands using fork, execvp, and waitpid, and repeat until an exit command is executed. The program is designed using composite design pattern, utilizing the following classes: Tokenizer, Executor, and Token which will have various subclasses. The client, R'Shell, will take a command input which will be used to instantiate a Tokenizer object. The Tokenzier object will parse and split the input using boost library with regex, and create appropriate Token objects. The token objects utilize polymorphism to define their own execute() function, involving execvp, fork and waitpid. The Tokenizer object will setup a vector of type Token* that will be passed to an Executor object that will call the Tokens' execute() function. 
 
 # Diagram
-https://github.com/jortega2/assignment-jorr/blob/master/images/CS%20100%20Assignment%20OMT_%20Class%20Diagram.png?raw=true
+![](https://raw.githubusercontent.com/cs100/assignment-jorr/master/images/CS%20100%20Assignment%20OMT_%20Class%20Diagram.png?token=AIV3NNKE3IBTACTNVMG4OSS6HOT6S)
 
 # Classes
 **Abstract Token Class:**\
@@ -43,20 +43,20 @@ The method of parsing we chose to use is boost library with regex. To get boost 
 **Connectors:**\
 While investigating the connector behavior, we found that a command shell reads the input from left to right, unless parenthesis are used. When || is used, the shell will execute the left side first, after which it may execute the right side but only if the left side failed. When using && the shell will attempt to execute both sides of the input but will stop if the left side fails. With the ; connector, it is similar to && but will attempt to execute even if the left side of the input fails. When using these three in conjunction, the shell reads the input from left to right and behaves as expected.
 # Development and Testing Roadmap
-1. Create Token Class
-1. Create cmdToken Class
-1. Create Tokenizer Class
-1. Update and test parsing function
-1. Create Executor Class
-1. Fix exit bug 
-1. Test program with commands, arguments, and flags (no connectors)
-1. Create andToken Class, implement into Tokenizer
-1. Test program for proper "&&" functionality 
-1. Create semiColonToken Class, implement into Tokenizer
-1. Test program for proper ";" functionality
-1. Test program with multiple connectors (both && and ;)
-1. Create orToken Class, implement into Tokenizer
-1. Test for proper "||" functionality
-1. Testing for multiple connectors, arguments, flags
-1. Finalize Unit Tests
-1. Finalize Integration Tests
+1. [Create Token Class] (https://github.com/cs100/assignment-jorr/issues/1)
+1. [Create cmdToken Class] (https://github.com/cs100/assignment-jorr/issues/2)
+1. [Create Tokenizer Class] (https://github.com/cs100/assignment-jorr/issues/3)
+1. [Update and test parsing function] (https://github.com/cs100/assignment-jorr/issues/4)
+1. [Create Executor Class] (https://github.com/cs100/assignment-jorr/issues/5)
+1. [Fix exit bug ] (https://github.com/cs100/assignment-jorr/issues/6)
+1. [Test program with commands, arguments, and flags (no connectors)] (https://github.com/cs100/assignment-jorr/issues/7)
+1. [Create andToken Class, implement into Tokenizer] (https://github.com/cs100/assignment-jorr/issues/8)
+1. [Test program for proper "&&" functionality ] (https://github.com/cs100/assignment-jorr/issues/9)
+1. [Create semiColonToken Class, implement into Tokenizer] (https://github.com/cs100/assignment-jorr/issues/10)
+1. [Test program for proper ";" functionality] (https://github.com/cs100/assignment-jorr/issues/11)
+1. [Test program with multiple connectors (both && and ;)] (https://github.com/cs100/assignment-jorr/issues/12)
+1. [Create orToken Class, implement into Tokenizer] (https://github.com/cs100/assignment-jorr/issues/13)
+1. [Test for proper "||" functionality] (https://github.com/cs100/assignment-jorr/issues/14)
+1. [Testing for multiple connectors, arguments, flags] (https://github.com/cs100/assignment-jorr/issues/15)
+1. [Finalize Unit Tests] (https://github.com/cs100/assignment-jorr/issues/16)
+1. [Finalize Integration Tests] (https://github.com/cs100/assignment-jorr/issues/17)
