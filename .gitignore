@@ -37,3 +37,7 @@ test
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
+prototype/Makefile
+prototype/cmake_install.cmake
+prototype/commands_exec
+prototype/parse_exec
