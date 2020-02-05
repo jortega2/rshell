@@ -1,8 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-
-ADD_EXECUTABLE(commands_exec
-	prototype/commands.cpp
-)
+set (CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_STANDARD 11)
+ADD_SUBDIRECTORY(googletest)
 
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
@@ -13,4 +12,9 @@ if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
 	add_executable(rshell src/main.cpp)
 	target_link_libraries(rshell ${Boost_LIBRARIES})
+	add_executable(test unit_tests/unit_tests.cpp)
+	target_link_libraries(test ${Boost_LIBRARIES})
 endif()
+
+TARGET_LINK_LIBRARIES(test gtest)
+TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON)

@@ -7,13 +7,13 @@ int main() {
 	
 	while(1){
 		std::cout <<"[rshell] $ ";
-		
 		std::getline(std::cin, userInput);
 		if (userInput == "exit"){
 			break;
 		}else{
 			Tokenizer* command = new Tokenizer(userInput);
-			command->showStrings();
+			command->showArguments();
+			command->showConnectors();
 		}
 	}
 }
