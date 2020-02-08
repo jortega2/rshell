@@ -7,7 +7,7 @@ Robert Rivera SID: 862086500
 Our program will accomplish the following: print a command prompt, read in a line of command(s) and connector(s) from standard input, execute the appropriate commands using fork, execvp, and waitpid, and repeat until an exit command is executed. The program is designed using composite design pattern, utilizing the following classes: Tokenizer, Executor, and Token which will have various subclasses. The client, R'Shell, will take a command input which will be used to instantiate a Tokenizer object. The Tokenzier object will parse and split the input using boost library with regex, and create appropriate Token objects. The token objects utilize polymorphism to define their own execute() function, involving execvp, fork and waitpid. The Tokenizer object will setup a vector of type Token* that will be passed to an Executor object that will call the Tokens' execute() function. 
 
 # Diagram
-![](https://raw.githubusercontent.com/cs100/assignment-jorr/master/images/CS%20100%20Assignment%20OMT_%20Class%20Diagram.png?token=AIV3NNINATURBK7ZDXKZBCS6HOU5M)
+![](https://raw.githubusercontent.com/cs100/assignment-jorr/master/images/CS%20100%20Assignment%20OMT_%20Class%20Diagram.png?token=AIV3NNJVIUY3I5WS4AOEPE26JB7PY)
 
 # Classes
 **Abstract Token Class:**\
