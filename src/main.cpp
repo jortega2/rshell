@@ -1,19 +1,25 @@
 #include <iostream>
+#include "../header/cmdToken.hpp"
 #include "../header/Tokenizer.hpp"
+#include <istream>
 
 int main() {
+	
 	std::cout << "Enter \"exit\" to leave shell.\n\n\nEnter a command.\n";
 	std::string userInput;
 	
-	while(1){
+	for (int i = 0; i < 2; i++) {
 		std::cout <<"[rshell] $ ";
 		std::getline(std::cin, userInput);
 		if (userInput == "exit"){
-			break;
+			//i+=10;
 		}else{
-			Tokenizer* command = new Tokenizer(userInput);
-			command->showArguments();
-			command->showConnectors();
+			//Tokenizer* command = new Tokenizer(userInput);
+			//command->showArguments();
+			//command->showConnectors();
+			CmdToken* cmd = new CmdToken(userInput);
+			cmd->execute();
 		}
 	}
+	return 0;
 }

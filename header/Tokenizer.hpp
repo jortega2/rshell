@@ -1,13 +1,12 @@
 #ifndef __TOKENIZER_HPP__
-#define __BASE_HPP__
+#define __TOKENIZER_HPP__
 #include <iostream>
 #include <string>
 #include <boost/regex.hpp>
-#include <algorithm>
 #include <vector>
-#include <boost/xpressive/xpressive.hpp>
+#include "Token.hpp"
+#include "cmdToken.hpp"
 
-//boost::regex cmdRegex("([^&|;][^&|;]+(\".+\"\\s*))|([^&|;][^&|;]+?(?=&&|\\|\\||;|$))");
 boost::regex conRegEx("(&&|;|\\|\\|)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 boost::regex comRegEx("(#)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
@@ -15,8 +14,16 @@ class Tokenizer {
 	private:
 		std::vector<std::string> arguments;
 		std::vector<std::string> connectors;
+		std::vector<Token*> tokens;
 	public:
 		Tokenizer(std::string arg) {
+			//parse and delete comments, mindful of quotes
+			boost::sregex_token_iterator c (arg.begin(), arg.end(), comRegEx, -1);
+			//end iterator for comparison
+			boost::sregex_token_iterator end;
+			//assign arg with new string without comments
+			arg = *c;
+			
 			//temp variables with command
 			std::string temp1 = arg;
 			std::string temp2 = arg;
@@ -29,13 +36,6 @@ class Tokenizer {
                 		connectors.push_back(cons.str(0));
                 		temp1 = cons.suffix();
         		}		
-			//parse and delete comments, mindful of quotes
-			boost::sregex_token_iterator c(temp2.begin(), temp2.end(), comRegEx, -1);
-			//end iterator for comparison of other iterators
-			boost::sregex_token_iterator end;
-			
-			//assign temp2 with argument but comments are now deleted
-			temp2 = *c;
 
 			//split commands from connecotrs
 			boost::sregex_token_iterator p(temp2.begin(), temp2.end(), conRegEx, -1);
@@ -45,11 +45,16 @@ class Tokenizer {
                 		
 				arguments.push_back(*p++);
         		}	
-			/*while (boost::regex_search(temp2, coms, cmdRegex)){
-                                  arguments.push_back(coms.str(0));
-                                  temp2 = coms.suffix();
-                        }*/
-			//delete temp1, temp2, cons, coms;
+		}
+		void createTokens(){
+			/*for (int i = 0; i < arguments.size(); ++i){
+				CmdToken * tok = new CmdToken(arguments[i]);
+				tok->execute();
+				tokens.push_back(tok);
+			}*/
+		}
+		Token * getTokens() {
+			return tokens.back();
 		}
 		std::vector<std::string> returnArgs(){
 			return arguments;
