@@ -3,6 +3,7 @@
 
 #include "gtest/gtest.h"
 #include "../header/cmdToken.hpp"
+#include "../src/cmdToken.cpp"
 #include "unistd.h"
 
 TEST (cmdTokenTest, genericCommmand) {

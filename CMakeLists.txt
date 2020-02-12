@@ -10,7 +10,7 @@ find_package(Boost 1.45.0 COMPONENTS regex)
 
 if(Boost_FOUND)
 	include_directories(${Boost_INCLUDE_DIRS})
-	add_executable(rshell src/main.cpp)
+	add_executable(rshell src/main.cpp src/Tokenizer.cpp src/cmdToken.cpp)
 	target_link_libraries(rshell ${Boost_LIBRARIES})
 	add_executable(test unit_tests/unit_tests.cpp)
 	target_link_libraries(test ${Boost_LIBRARIES})
