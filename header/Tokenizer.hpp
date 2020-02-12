@@ -9,12 +9,11 @@ class Tokenizer {
 	private:
 		std::vector<std::string> arguments;
 		std::vector<std::string> connectors;
-		std::vector<Token*> tokens;
 	public:
 		Tokenizer(std::string arg);
 		void createTokens();
-		Token * getTokens();
 		std::vector<std::string> returnArgs();
+		std::vector<std::string> returnConns();
 		void showArguments();
 		void showConnectors();
 };

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../header/cmdToken.hpp"
 #include "../header/Tokenizer.hpp"
+#include "../header/Executor.hpp"
 
 int main() {
 	
@@ -13,11 +14,12 @@ int main() {
 		if (userInput == "exit"){
 			i+=10;
 		}else{
-			//Tokenizer* command = new Tokenizer(userInput);
+			Tokenizer* command = new Tokenizer(userInput);
 			//command->showArguments();
 			//command->showConnectors();
-			CmdToken* cmd = new CmdToken(userInput);
-			cmd->execute();
+			Executor* exec = new Executor(command->returnArgs(), command->returnConns());
+			exec->createTokens();
+			exec->execute();
 		}
 	}
 	return 0;
