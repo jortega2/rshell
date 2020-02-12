@@ -41,3 +41,5 @@ prototype/Makefile
 prototype/cmake_install.cmake
 prototype/commands_exec
 prototype/parse_exec
+Makefile
+cmake_install.cmake

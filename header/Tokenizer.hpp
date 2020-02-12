@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <boost/regex.hpp>
 
 class Tokenizer {
 	private:

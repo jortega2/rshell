@@ -14,9 +14,15 @@ if(Boost_FOUND)
 	src/main.cpp 
 	src/Tokenizer.cpp 
 	src/cmdToken.cpp
-	src/Executor.cpp)
+	src/Executor.cpp
+	src/andToken.cpp)
 	target_link_libraries(rshell ${Boost_LIBRARIES})
-	add_executable(test unit_tests/unit_tests.cpp)
+	add_executable(test 
+	unit_tests/unit_tests.cpp
+	src/Tokenizer.cpp
+	src/cmdToken.cpp
+	src/Executor.cpp
+	src/andToken.cpp)
 	target_link_libraries(test ${Boost_LIBRARIES})
 endif()
 

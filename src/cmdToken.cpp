@@ -1,12 +1,10 @@
 #include "../header/cmdToken.hpp"
-#include <boost/regex.hpp>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdio.h>
 
-boost::regex cmdRegEx("(?<=\")[^\"]*(?=\")|[^\\s\"]+");
-
 CmdToken::CmdToken(std::string input) { 
+	boost::regex cmdRegEx("(?<=\")[^\"]*(?=\")|[^\\s\"]+");
 	ret = 1;
 	boost::smatch tempargs;
 	while(boost::regex_search(input, tempargs, cmdRegEx)){
@@ -30,15 +28,14 @@ int CmdToken::execute() {
 	}
 	if (split == 0)	{
 		//std::cout << "child: " << split << std::endl;
-		if (execvp(command[0], command) == -1){
-			perror(args[0]);
-		}
+		execvp(command[0], command);
+		perror(args[0]);
 		exit(1);
 	}
 	if (split > 0){
 		waitpid(split, &status, WUNTRACED);
 		if ((WIFEXITED(status))){
-			if (WEXITSTATUS(status) == 1){
+			if ( WEXITSTATUS(status) != 0){
 				ret = 0;
 			}
 		}

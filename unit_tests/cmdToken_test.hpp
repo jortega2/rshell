@@ -3,8 +3,7 @@
 
 #include "gtest/gtest.h"
 #include "../header/cmdToken.hpp"
-#include "../src/cmdToken.cpp"
-#include "unistd.h"
+
 
 //cmdToken receivs input that has already been heavily parsed by Tokenizer.
 //cmdToken should never receive a command with a connector, comment, or an input that is more 
@@ -34,6 +33,11 @@ TEST (cmdTokenParse, HandlesQuotes) {
 TEST (CmdTokenTest, ls){
 	CmdToken* test = new CmdToken("ls");
 	EXPECT_EQ(test->execute(), 1); 
+}
+
+TEST (CmdTokenTest, lsj){
+        CmdToken* test = new CmdToken("ls -j");
+        EXPECT_EQ(test->execute(), 0);
 }
 
 TEST (CmdTokenTest, exit){

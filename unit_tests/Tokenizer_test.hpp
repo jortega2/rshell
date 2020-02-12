@@ -3,7 +3,6 @@
 
 #include "gtest/gtest.h"
 #include "../header/Tokenizer.hpp"
-#include "../src/Tokenizer.cpp"
 
 TEST (TokenizerTest, OneCommand) {
 	std::vector<std::string> one {"ls -a"};

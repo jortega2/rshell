@@ -1,12 +1,10 @@
 #include "../header/Tokenizer.hpp"
 #include "../header/Token.hpp"
 #include "../header/cmdToken.hpp"
-#include <boost/regex.hpp>
 
-boost::regex conRegEx("(&&|;|\\|\\|)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-boost::regex comRegEx("(#)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-
-	Tokenizer::Tokenizer(std::string arg) {
+Tokenizer::Tokenizer(std::string arg) {
+	boost::regex conRegEx("(&&|;|\\|\\|)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+	boost::regex comRegEx("(#)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	//parse and delete comments, mindful of quotes
 	boost::sregex_token_iterator c (arg.begin(), arg.end(), comRegEx, -1);
 	//end iterator for comparison

@@ -4,7 +4,7 @@
 #include "Token.hpp"
 #include <string>
 #include <vector>
-
+#include <boost/regex.hpp>
 
 class CmdToken : public Token {
 	private:
