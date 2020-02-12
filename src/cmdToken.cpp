@@ -7,6 +7,7 @@
 boost::regex cmdRegEx("(?<=\")[^\"]*(?=\")|[^\\s\"]+");
 
 CmdToken::CmdToken(std::string input) { 
+	ret = 1;
 	boost::smatch tempargs;
 	while(boost::regex_search(input, tempargs, cmdRegEx)){
 		temp.push_back(tempargs.str(0));
@@ -19,22 +20,30 @@ CmdToken::CmdToken(std::string input) {
 	args.push_back(NULL);
 			
 }
-void CmdToken::execute() {
+int CmdToken::execute() {
 	int status;
 	char ** command =  &args[0];
 	pid_t split  = fork();
 	if (split == -1){
-		perror("command failed");
+		perror("fork failed, check processes");
 		exit(1);
 	}
 	if (split == 0)	{
-		std::cout << "child: " << split << std::endl;
-		execvp(command[0], command);
+		//std::cout << "child: " << split << std::endl;
+		if (execvp(command[0], command) == -1){
+			perror(args[0]);
+		}
 		exit(1);
 	}
 	if (split > 0){
 		waitpid(split, &status, WUNTRACED);
+		if ((WIFEXITED(status))){
+			if (WEXITSTATUS(status) == 1){
+				ret = 0;
+			}
+		}
 	}
+	return ret;
 }
 std::vector<std::string> CmdToken::returnVector(){
 	return temp;

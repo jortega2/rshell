@@ -10,9 +10,10 @@ class CmdToken : public Token {
 	private:
 		std::vector<std::string> temp;
 		std::vector<char*> args;
+		int ret;
 	public:
 		CmdToken(std::string input);
-		virtual void execute();
+		virtual int execute();
 		std::vector<std::string> returnVector();
 };
 
