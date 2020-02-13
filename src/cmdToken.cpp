@@ -21,6 +21,9 @@ CmdToken::CmdToken(std::string input) {
 int CmdToken::execute() {
 	int status;
 	char ** command =  &args[0];
+	if (temp[0]  == "exit") {
+		exit(1);
+	}
 	pid_t split  = fork();
 	if (split == -1){
 		perror("fork failed, check processes");

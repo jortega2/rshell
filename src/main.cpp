@@ -9,7 +9,7 @@ int main() {
 	std::string userInput;
 	
 	for (int i = 0; i < 10; i++) {
-		std::cout <<"[rshell] $ ";
+		std::cout <<"[rshell]$ ";
 		std::getline(std::cin, userInput);
 		if (userInput == "exit"){
 			i+=10;
@@ -24,7 +24,7 @@ int main() {
 				exec->createTokens();
 				exec->execute();
 			}
-		}
+		//}
 	}
 	return 0;
 }
