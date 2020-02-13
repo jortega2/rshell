@@ -5,13 +5,16 @@
 Tokenizer::Tokenizer(std::string arg) {
 	boost::regex conRegEx("(&&|;|\\|\\|)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 	boost::regex comRegEx("(#)(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
-	//parse and delete comments, mindful of quotes
-	boost::sregex_token_iterator c (arg.begin(), arg.end(), comRegEx, -1);
+	if (arg != ""){
+		//parse and delete comments, mindful of quotes
+		boost::sregex_token_iterator c (arg.begin(), arg.end(), comRegEx, -1);
+		//assign arg with new string without comments
+		arg = *c;
+	}
+	
 	//end iterator for comparison
 	boost::sregex_token_iterator end;
-	//assign arg with new string without comments
-	arg = *c;
-			
+
 	//temp variables with command
 	std::string temp1 = arg;
 	std::string temp2 = arg;
@@ -31,7 +34,24 @@ Tokenizer::Tokenizer(std::string arg) {
 	//assign commands into vector
         while (p != end){       	
 		arguments.push_back(*p++);
-       	}	
+       	}
+	for (int i = 0; i < arguments.size(); i++){
+        	int whitespace = 0;
+        	for (int j = 0; j <arguments[i].size(); j++){
+            		if (isspace(arguments[i][j])){
+                		if (isspace(arguments[i][j])){
+                  			whitespace++;
+                		}
+            		}
+        	}
+        	if (whitespace == arguments[i].size()){
+            		arguments.erase(arguments.begin()+i);
+        	}	
+    	}
+	if (arguments.empty()){
+                arguments.push_back("");
+        }
+			
 }
 std::vector<std::string> Tokenizer::returnArgs(){
 	return arguments;
