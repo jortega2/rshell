@@ -12,9 +12,15 @@ SemiToken::SemiToken(Token * l, Token * r){
 }
 
 int SemiToken::execute(){
-	left->execute();
-	if (right != NULL){
-		right->execute();
+	int ret;
+
+	if (right == NULL){
+		ret = left->execute();
 	}
-	return 1;
+	
+	if (right != NULL){
+		left->execute();
+		ret = right->execute();
+	}
+	return ret;
 }

@@ -22,14 +22,14 @@ TEST (SemiColonTwoCommand, validSCinvalid){
         CmdToken* left = new CmdToken("echo pog");
         CmdToken* right = new CmdToken ("pog");
         SemiToken* test = new SemiToken(left, right);
-        EXPECT_EQ(test->execute(), 1);
+        EXPECT_EQ(test->execute(), 0);
 }
 
 TEST (SemiColonTwoCommand, invalidSinCvalid){
         CmdToken* left = new CmdToken("pog");
         CmdToken* right = new CmdToken ("gers");
         SemiToken* test = new SemiToken(left, right);
-        EXPECT_EQ(test->execute(), 1);
+        EXPECT_EQ(test->execute(), 0);
 }
 
 TEST (SemiColonOneCommand, validSC){
@@ -41,7 +41,7 @@ TEST (SemiColonOneCommand, validSC){
 TEST (SemiColonOneCommand, invalidSC){
         CmdToken* left = new CmdToken("ls -j");
         SemiToken* test = new SemiToken(left);
-        EXPECT_EQ(test->execute(), 1);
+        EXPECT_EQ(test->execute(), 0);
 }
 
 TEST (SemiColonOneCommand, nullSC){

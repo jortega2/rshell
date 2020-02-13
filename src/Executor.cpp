@@ -15,7 +15,7 @@ void Executor::createTokens() {
 		tokens.push_back(tok);
 	}
 	for (int i = 0; i < connectors.size(); i++){
-                if ((i+1) == connectors.size()){
+                if (((i+1) == connectors.size() &&  arguments.back() == ";")){
                         if ((arguments.size() - connectors.size()) == 1){
                                 if (connectors.back() == ";"){
                                         Token * tok =  new SemiToken(tokens.back(), tokens[i+1]);

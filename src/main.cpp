@@ -8,7 +8,7 @@ int main() {
 	std::cout << "Enter \"exit\" to leave shell.\n\n\nEnter a command.\n";
 	std::string userInput;
 	
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 10; i++) {
 		std::cout <<"[rshell] $ ";
 		std::getline(std::cin, userInput);
 		if (userInput == "exit"){
