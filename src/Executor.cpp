@@ -1,6 +1,7 @@
 #include "../header/Executor.hpp"
 #include "../header/cmdToken.hpp"
 #include "../header/andToken.hpp"
+#include "../header/orToken.hpp"
 
 Executor::Executor(std::vector<std::string> args, std::vector<std::string> conns) {
 	arguments = args;
@@ -17,10 +18,10 @@ void Executor::createTokens() {
                     if (connectors[i] == "&&"){
                         Token * tok = new AndToken(tokens[i], tokens[i+1]);
                         tokens.push_back(tok);
-                    }/* else if (connectors[i] == "||"){
+                    }else if (connectors[i] == "||"){
                         Token * tok = new OrToken(tokens[i], tokens[i+1]);
                         tokens.push_back(tok);
-                    }else if (connectors[i] == ";"){
+                    }/*else if (connectors[i] == ";"){
                         Token * tok = new SemiToken(tokens[i], tokens[i+1]);
                         tokens.push_back(tok);
                     }*/
@@ -28,10 +29,10 @@ void Executor::createTokens() {
                         if (connectors[i] == "&&"){
                             Token * tok = new AndToken(tokens.back(), tokens.at(i+1));
                             tokens.push_back(tok);
-                        }/* else if (connectors[i] == "||"){
+                        } else if (connectors[i] == "||"){
                             Token * tok = new OrToken(tokens.back(), tokens.at(i+1));
                             tokens.push_back(tok);
-                        } else if (connectors[i] == ";"){
+                        }/* else if (connectors[i] == ";"){
                             Token * tok = new SemiToken(tokens.back(), tokens.at(i+1));
                             tokens.push_back(tok);
                         }*/

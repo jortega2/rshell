@@ -1,5 +1,5 @@
 #ifndef __ANDTOKEN_TEST_HPP__
-#define __ANDTOKEN_HPP_TEST__
+#define __ANDTOKEN_TEST_HPP__
 
 #include "gtest/gtest.h"
 #include "../header/andToken.hpp"
