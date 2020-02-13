@@ -13,7 +13,8 @@ private:
 public:
 	Executor(std::vector<std::string> args, std::vector<std::string> conns);
 	void createTokens();
-	void execute();
+	bool isValid();
+	int execute();
 };
 
 #endif

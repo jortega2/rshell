@@ -35,6 +35,7 @@ Tokenizer::Tokenizer(std::string arg) {
         while (p != end){       	
 		arguments.push_back(*p++);
        	}
+	//std::cout << arguments.size() << std::endl;
 	for (int i = 0; i < arguments.size(); i++){
         	int whitespace = 0;
         	for (int j = 0; j <arguments[i].size(); j++){
@@ -48,6 +49,7 @@ Tokenizer::Tokenizer(std::string arg) {
             		arguments.erase(arguments.begin()+i);
         	}	
     	}
+	//std::cout << arguments.size() << std::endl;
 	if (arguments.empty()){
                 arguments.push_back("");
         }

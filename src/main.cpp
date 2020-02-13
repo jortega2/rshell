@@ -14,12 +14,16 @@ int main() {
 		if (userInput == "exit"){
 			i+=10;
 		}else{
+			//CmdToken* cmd = new CmdToken(userInput);
+			//cmd->execute();
 			Tokenizer* command = new Tokenizer(userInput);
 			//command->showArguments();
 			//command->showConnectors();
 			Executor* exec = new Executor(command->returnArgs(), command->returnConns());
-			exec->createTokens();
-			exec->execute();
+			if (exec->isValid()){
+				exec->createTokens();
+				exec->execute();
+			}
 		}
 	}
 	return 0;
