@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
 
-#include "Tokenizer_test.hpp"
-#include "cmdToken_test.hpp"
-#include "andToken_test.hpp"
-#include "orToken_test.hpp"
-#include "Executor_test.hpp"
+#include "Tokenizer_test.cpp"
+#include "cmdToken_test.cpp"
+#include "andToken_test.cpp"
+#include "orToken_test.cpp"
+#include "Executor_test.cpp"
 
 int main(int argc, char **argv) {
    ::testing::InitGoogleTest(&argc, argv);
