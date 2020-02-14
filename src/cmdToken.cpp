@@ -49,6 +49,7 @@ int CmdToken::execute() {
 	}
 	return ret;
 }
+//used only for unit tests
 std::vector<std::string> CmdToken::returnVector(){
 	return temp;
 }

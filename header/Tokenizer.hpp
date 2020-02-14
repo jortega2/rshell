@@ -12,7 +12,6 @@ class Tokenizer {
 		std::vector<std::string> connectors;
 	public:
 		Tokenizer(std::string arg);
-		void createTokens();
 		std::vector<std::string> returnArgs();
 		std::vector<std::string> returnConns();
 };
