@@ -1,9 +1,12 @@
-#ifndef __ANDTOKEN_TEST_HPP__
-#define __ANDTOKEN_TEST_HPP__
+#ifndef __ANDTOKEN_TEST_CPP__
+#define __ANDTOKEN_TEST_CPP__
 
 #include "gtest/gtest.h"
 #include "../header/andToken.hpp"
 #include "../header/cmdToken.hpp"
+
+//Note: execute function will return 0 if execvp throws in error.
+//execute will return 1 if no error is detected.
 
 TEST (andTokenTest, lsANDechoSuccess){
 	CmdToken* left = new CmdToken("ls");

@@ -4,6 +4,9 @@
 #include "gtest/gtest.h"
 #include "../header/cmdToken.hpp"
 
+//Note: execute function will return 0 if execvp throws in error.
+//execute will return 1 if no error is detected.
+
 TEST (SemiColonTwoCommand, validSCvalid){
 	CmdToken* left = new CmdToken("ls");
 	CmdToken* right = new CmdToken ("echo success");

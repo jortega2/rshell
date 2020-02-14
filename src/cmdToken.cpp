@@ -19,10 +19,15 @@ CmdToken::CmdToken(std::string input) {
 			
 }
 int CmdToken::execute() {
-	int status;
+	//if execvp throws in error, ret will be assigned 0. otherwise it will be 1.
+	//this is used for connector logic, as well as unit tests.
+	int status ;
 	char ** command =  &args[0];
-	if (temp[0]  == "exit") {
-		exit(1);
+	
+	if (!(temp.empty())){
+		if (temp[0]  == "exit") {
+			exit(1);
+		}
 	}
 	pid_t split  = fork();
 	if (split == -1){
@@ -30,7 +35,6 @@ int CmdToken::execute() {
 		exit(1);
 	}
 	if (split == 0)	{
-		//std::cout << "child: " << split << std::endl;
 		execvp(command[0], command);
 		perror(args[0]);
 		exit(1);

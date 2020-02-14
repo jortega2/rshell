@@ -1,9 +1,12 @@
-#ifndef __ORTOKEN_TEST_HPP__
-#define __ORTOKEN_TEST_HPP__
+#ifndef __ORTOKEN_TEST_CPP__
+#define __ORTOKEN_TEST_CPP__
 
 #include "gtest/gtest.h"
 #include "../header/orToken.hpp"
 #include "../header/cmdToken.hpp"
+
+//Note: execute function will return 0 if execvp throws in error.
+//execute will return 1 if no error is detected.
 
 TEST (orTokenTest, lsORechoSuccess){
 	//ls || echo sucess

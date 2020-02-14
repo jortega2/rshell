@@ -1,5 +1,5 @@
-#ifndef __CMD_TEST_HPP__
-#define __CMD_TEST_HPP__
+#ifndef __CMD_TEST_CPP__
+#define __CMD_TEST_CPP__
 
 #include "gtest/gtest.h"
 #include "../header/cmdToken.hpp"
@@ -11,6 +11,9 @@
 //cmdToken will typically receive input in the form "executable argument(s)" which it will take and split up
 //delete necessary whitespace (unless in quotes), remove quotes (e.g. echo "poggers" will output poggers not "poggers")
 //anything else is outside the scope of cmdToken and should have been handled  by Tokenizer. 
+
+//Note: execute function will return 0 if execvp throws in error.
+//execute will return 1 if no error is detected.
 
 TEST (cmdTokenParse, genericCommmand) {
 	std::vector <std::string> expected {"ls", "-a"};
@@ -37,11 +40,6 @@ TEST (CmdTokenTest, ls){
 
 TEST (CmdTokenTest, lsj){
         CmdToken* test = new CmdToken("ls -j");
-        EXPECT_EQ(test->execute(), 0);
-}
-
-TEST (CmdTokenTest, exit){
-        CmdToken* test = new CmdToken("exit");
         EXPECT_EQ(test->execute(), 0);
 }
 
