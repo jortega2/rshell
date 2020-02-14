@@ -15,7 +15,5 @@ class Tokenizer {
 		void createTokens();
 		std::vector<std::string> returnArgs();
 		std::vector<std::string> returnConns();
-		void showArguments();
-		void showConnectors();
 };
 #endif 
