@@ -14,24 +14,23 @@ Our program will accomplish the following: print a command prompt, read in a lin
 This class will be used to define some common behavior that can be inherited by multiple subclasses. In this case, the multiple subclasses will be the different inputs (we will call them tokens) a user can enter such as executables, arguments, and connectors. The Token class will have a pure virtual function "execute" which will be defined by its subclasses.
 
 **CmdToken:**\
-This class will be a subclass of the Token class. It will have an array of char* that will can hold executable, arguments and flags (e.g. "ls -a or mkdir directory). It will define the execute function from the Token class to use execvp, fork, and waitpid system calls to execute commands. 
+This class will be a subclass of the Token class. It will have an array of char* that will hold executable, arguments and flags (e.g. "ls -a, mkdir directory). It will define the execute function from the Token class to use execvp, fork, and waitpid system calls to execute commands. 
 
 **andToken:**\
-This class will be a subclass of the Token class. It will define the execute function from the Token class to simulate the "&&" connector behavior of a shell. 
+This class will be a subclass of the Token class. It will receive two objects of type Token when instantiated. It will define the execute function from the Token class to simulate the "&&" connector behavior of a shell. 
 
 **orToken:**\
-This class will be a subclass of the Token class. It will define the execute function from the Token class to simulate the 
-"||" connector behavior of a shell.
+This class will be a subclass of the Token class. It will receive two objects of type Token when instantiated. It will define the execute function from the Token class to simulate the "||" connector behavior of a shell.
 
 **semiColonToken:**\
-This class will be a subclass of the Token class. It will define the execute function from the Token class to simulate the ";" connector behavior of a shell.
+This class will be a subclass of the Token class. It will receive one or two objects of type Token when instantiated. It will define the execute function from the Token class to simulate the ";" connector behavior of a shell.
 
 
 **Tokenizer Class:**\
-This class will receive the command input of type string. It will utilize boost library with regex to parse through the input and instansiate appropriate objects of cmdToken, andToken, orToken, or semiColonToken. It will then add them into a vector of type Token that will be used by the Executor class.
+This class will receive the command input of type string. It will utilize boost library with regex to parse through the input and push them into argument and connector string vectors. These vectors will be used to instantiate any executor object.
  
  **Executor Class:**\
-The executor class will receive a vector of type Token in its constructor. It will then take advantage of inheritance and polymorphism to call the tokens' execute functions. 
+The executor class will receive an argument and connector vectors of type string in its constructor. It will then create Tokens of appropritate type and push them into a Token vector. It will then take advantage of inheritance and polymorphism to call the tokens' execute functions. 
 
 # Prototypes/Research
 **Commands:**\
