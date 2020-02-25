@@ -4,14 +4,13 @@
 #include "../header/orToken.hpp"
 #include "../header/semiToken.hpp"
 
-Executor::Executor(std::vector<std::string> args, std::vector<std::string> conns) {
+Executor::Executor(std::vector<std::string> args) {
 	arguments = args;
-	connectors = conns;
 }
 
 void Executor::createTokens() {
 	//create the tree of commands, but only if connector usage is valid
-	if (valid == true){
+	/*if (valid == true){
 		for (int i = 0; i <arguments.size(); i++){
 			CmdToken * tok = new CmdToken(arguments[i]);
 			tokens.push_back(tok);
@@ -51,13 +50,13 @@ void Executor::createTokens() {
                         	}
                 	}
 		}
-	}
+	}*/
 }
 
 bool Executor::isValid(){
 	//check for valid use of connectors. for 3 connectors there should be 4 arguments to be valid.
 	//unless the last connector is ; in which case connectors and arguments can be equal
-	valid = true;
+	/*valid = true;
 	if (connectors.empty()){
 		
 	}else if ((connectors.back() == "&&") || (connectors.back() ==  "||")){
@@ -71,13 +70,13 @@ bool Executor::isValid(){
 			valid = false;
 		}
 	} 
-	return valid;
+	return valid;*/
 }
 int Executor::execute(){
 //ret represents if execvp called properly or not. If all commands execute properly execute will return 1, 0 otherwise.
 int ret = 0;
 	if (valid == true){
-		ret = tokens.back()->execute();
+		//ret = tokens.back()->execute();
 	}
 	return ret;
 }

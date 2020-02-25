@@ -19,6 +19,8 @@ int main() {
 		std::getline(std::cin, userInput);
 		if (userInput == "exit") exit(1);
 		Tokenizer* command = new Tokenizer(userInput);
+		command->parse();
+		command->shuntingYardAlgorithm();
 		a = command->returnArgs();
 		for (int i = 0; i < a.size(); i++){
 			std::cout << a[i] << std::endl;
