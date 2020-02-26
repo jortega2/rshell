@@ -30,25 +30,25 @@ void Tokenizer::parse(){
 	do {
                 boost::smatch thing;
                 if (boost::regex_search(arg, thing, par1)){
-                        std::cout << "parenthesis one found" << std::endl;
+                        //std::cout << "parenthesis one found" << std::endl;
                         temp.push_back(thing.str(0));
                         arg = thing.suffix();
                 } else if (boost::regex_search(arg, thing, par2)){
-                        std::cout << "parenthesis two found" << std::endl;
+                        //std::cout << "parenthesis two found" << std::endl;
                         temp.push_back(thing.str(0));
                         arg = thing.suffix();
                 } else if (boost::regex_search(arg, thing, conRegEx)){
-                        std::cout << "connector found" << std::endl;
+                        //std::cout << "connector found" << std::endl;
                         temp.push_back(thing.str(0));
                         arg = thing.suffix();
                 } else {
                         if (boost::regex_search(arg, thing, argRegEx)){
-                                std::cout << "before connector" << std::endl;
+                                //std::cout << "before connector" << std::endl;
                                 temp.push_back(thing.prefix());
                                 arg = arg.substr(thing.position());
                         }
                         else {
-                                std::cout << "no connectors left" << std::endl;
+                                //std::cout << "no connectors left" << std::endl;
                                 temp.push_back(arg);
                                 arg = "";
                         }
@@ -69,13 +69,16 @@ void Tokenizer::parse(){
                 }
         }
 	//push empty string if userinput was empty
-	if (arguments.empty()){
-                arguments.push_back("");
-        }	
+	if (temp.empty()){
+                temp.push_back("");
+        }
+	arguments = temp;	
 }
 
 void Tokenizer::shuntingYardAlgorithm(){
-	//reverse 
+	//clear arguments;
+	arguments.clear();
+
 	reverse(temp.begin(), temp.end());
 
 	for (int i = 0; i < temp.size(); i++){
@@ -85,9 +88,9 @@ void Tokenizer::shuntingYardAlgorithm(){
                         temp[i] = "(";
                 }
         }
-        for (int i = 0; i < temp.size(); i++){
+        /*for (int i = 0; i < temp.size(); i++){
                 std::cout << temp[i] << std::endl;
-        }
+        }*/
 	
 
 	std::stack<std::string> myStack;
@@ -105,15 +108,7 @@ void Tokenizer::shuntingYardAlgorithm(){
                                 myStack.pop();
                         }
                 } else if ((temp[i] == "||") || (temp[i] == "&&") || (temp[i] == ";")){
-                        if (!(myStack.empty()) && myStack.top() != "("){
-                                myQueue.push(temp[i]);
-                                while (!(myStack.empty()) && (myStack.top() != "(")){
-                                        myQueue.push(myStack.top());
-                                        myStack.pop();
-                                }
-                        } else {
-                                myStack.push(temp[i]);
-                        }
+                        myStack.push(temp[i]);
                 } else {
                         myQueue.push(temp[i]);
                 }
