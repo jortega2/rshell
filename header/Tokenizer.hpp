@@ -9,10 +9,12 @@
 class Tokenizer {
 	private:
 		std::vector<std::string> arguments;
-		std::vector<std::string> connectors;
+		std::vector<std::string> temp;
+		std::string arg;
 	public:
 		Tokenizer(std::string arg);
+		void parse();
+		void shuntingYardAlgorithm();
 		std::vector<std::string> returnArgs();
-		std::vector<std::string> returnConns();
 };
 #endif 
