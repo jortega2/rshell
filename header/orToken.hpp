@@ -10,6 +10,9 @@ private:
 	int ret;
 public:
 	OrToken(Token * l, Token * r);
+	OrToken();
+	void setLeft(Token * l);
+	void setRight(Token * r);
 	virtual int execute();
 };
 

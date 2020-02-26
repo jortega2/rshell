@@ -9,8 +9,10 @@ private:
 	Token * right;
 	int ret;
 public:
-	SemiToken(Token * l);
 	SemiToken(Token * l, Token * r);
+	SemiToken();
+	void setLeft(Token * l);
+	void setRight(Token * r);
 	virtual int execute();
 };
 

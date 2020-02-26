@@ -35,25 +35,20 @@ TEST (SemiColonTwoCommand, invalidSinCvalid){
         EXPECT_EQ(test->execute(), 0);
 }
 
-TEST (SemiColonOneCommand, validSC){
+TEST (SemiColonTokenTest, emptyConnectorTest) {
         CmdToken* left = new CmdToken("ls");
-        SemiToken* test = new SemiToken(left);
+        CmdToken* right = new CmdToken("pwd");
+        SemiToken* test = new SemiToken();
+        test->setLeft(left);
+        test->setRight(right);
         EXPECT_EQ(test->execute(), 1);
 }
 
-TEST (SemiColonOneCommand, invalidSC){
-        CmdToken* left = new CmdToken("ls -j");
-        SemiToken* test = new SemiToken(left);
+TEST (SemiColonTokenTest, EmptyNodesTest) {
+        CmdToken* right = new CmdToken("ls");
+        SemiToken* test = new SemiToken();
+        test->setRight(right);
         EXPECT_EQ(test->execute(), 0);
 }
-
-TEST (SemiColonOneCommand, nullSC){
-        CmdToken* left = new CmdToken("");
-        SemiToken* test = new SemiToken(left);
-        EXPECT_EQ(test->execute(), 1);
-}
-
-
-
 
 #endif

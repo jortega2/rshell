@@ -57,7 +57,20 @@ TEST (andTokenTest, doubleNestedAnd){
         EXPECT_EQ(test->execute(), 1);
 }
 
+TEST (andTokenTest, emptyConnectorTest) {
+	CmdToken* left = new CmdToken("ls");
+	CmdToken* right = new CmdToken("pwd");
+	AndToken* test = new AndToken();
+	test->setLeft(left);
+	test->setRight(right);
+	EXPECT_EQ(test->execute(), 1);
+}
 
-
+TEST (andTokenTest, NullNodeTest) {
+        CmdToken* left = new CmdToken("ls");
+        AndToken* test = new AndToken();
+        test->setLeft(left);
+        EXPECT_EQ(test->execute(), 0);
+}
 
 #endif

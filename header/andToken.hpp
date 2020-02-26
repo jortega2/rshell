@@ -10,6 +10,9 @@ private:
 	int ret;
 public:
 	AndToken(Token * l, Token * r);
+	AndToken();
+	void setLeft(Token * l);
+	void setRight(Token * r);
 	virtual int execute();
 };
 

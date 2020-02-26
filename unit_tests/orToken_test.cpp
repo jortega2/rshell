@@ -68,4 +68,20 @@ TEST (orTokenTest, validORkeyboardsmash){
         EXPECT_EQ(test->execute(), 1);
 }
 
+TEST (orTokenTest, emptyConnectorTest) {
+        CmdToken* left = new CmdToken("ls");
+        CmdToken* right = new CmdToken("pwd");
+        OrToken* test = new OrToken();
+        test->setLeft(left);
+        test->setRight(right);
+        EXPECT_EQ(test->execute(), 1);
+}
+
+TEST (orTokenTest, EmptyNodeTest) {
+        CmdToken* left = new CmdToken("ls");
+        OrToken* test = new OrToken();
+        test->setLeft(left);
+        EXPECT_EQ(test->execute(), 0);
+}
+
 #endif

@@ -1,11 +1,28 @@
 #include "../header/orToken.hpp"
 
-OrToken::OrToken(Token * a, Token * b){
-	left = a;
-	right = b;
+OrToken::OrToken(Token * l, Token * r){
+	left = l;
+	right = r;
 }
+
+OrToken::OrToken(){
+	left = nullptr;
+	right = nullptr;
+}
+
+void OrToken::setLeft(Token * l){
+        left = l;
+}
+
+void OrToken::setRight(Token * r){
+        right = r;
+}
+
+
 int OrToken::execute(){
-	if(left->execute() == 0){
+	if (left == nullptr | right == nullptr ){
+		ret = 0;
+	}else if (left->execute() == 0){
 		if (right ->execute() == 1){
 			ret = 1;
 		}
