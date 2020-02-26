@@ -57,4 +57,35 @@ TEST (TokenizerParse, 3CommandsWithCommentAndQuotes) {
 	test->parse();
         EXPECT_EQ(test->returnArgs(), monster);
 }
+
+TEST (TokenizerShuntingYard, NormalCommandNoParen) {
+        std::vector<std::string> monster{"||","&&","mkdir folder","echo \"# && || ;\"", "ls -a"};
+        Tokenizer* test = new Tokenizer("mkdir folder && echo \"# && || ;\" || ls -a #comment");
+        test->parse();
+	test->shuntingYardAlgorithm();
+        EXPECT_EQ(test->returnArgs(), monster);
+}
+TEST (TokenizerShuntingYard, VideoCommand) {
+        std::vector<std::string> vid{"||","&&","echo A", "echo B", "&&", "echo C", "echo D"};
+        Tokenizer* test = new Tokenizer("( echo A && echo B ) || ( echo C && echo D )");
+        test->parse();
+        test->shuntingYardAlgorithm();
+        EXPECT_EQ(test->returnArgs(), vid);
+}
+
+TEST (TokenizerShuntingYard, NormalMixedWithParenCommand) {
+        std::vector<std::string> cmd{"&&", "&&", ";", "echo A", "echo B","||", "echo C", "echo D", "echo E"};
+        Tokenizer* test = new Tokenizer("echo A ; echo B && ( echo C || echo D ) && echo E");
+        test->parse();
+        test->shuntingYardAlgorithm();
+        EXPECT_EQ(test->returnArgs(), cmd);
+}
+
+TEST (TokenizerShuntingYard, NestedParenthesis) {
+        std::vector<std::string> cmd{";","&&", "||", ";", "echo A", "echo B", "&&", "echo C", "echo D", "echo E", "echo F" };
+        Tokenizer* test = new Tokenizer("((echo A ; echo B) || ( echo C && echo D) && (echo E)) ; (echo F)");
+        test->parse();
+        test->shuntingYardAlgorithm();
+        EXPECT_EQ(test->returnArgs(), cmd);
+}
 #endif
