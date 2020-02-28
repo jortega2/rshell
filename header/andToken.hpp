@@ -11,8 +11,11 @@ private:
 public:
 	AndToken(Token * l, Token * r);
 	AndToken();
-	void setLeft(Token * l);
-	void setRight(Token * r);
+	virtual void setLeft(Token * l);
+	virtual void setRight(Token * r);
+	virtual Token* getLeft();
+	virtual Token* getRight();
+	virtual int isLeaf();
 	virtual int execute();
 };
 

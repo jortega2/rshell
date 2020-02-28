@@ -10,23 +10,19 @@
 
 TEST (SingleCommandTests, ls){
 	Tokenizer * tokeniz = new Tokenizer("ls");
-	Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+	tokeniz->shuntingYardAlgorithm();
+	Executor * exec = new Executor (tokeniz->returnArgs());
 	exec->isValid();
 	exec->createTokens();
 	EXPECT_EQ(exec->execute(), 1);
 }
 
-TEST (SingleCommandTests, lsSEMICOLON){
-        Tokenizer * tokeniz = new Tokenizer("ls ;");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
-        exec->isValid();
-        exec->createTokens();
-        EXPECT_EQ(exec->execute(), 1);
-}
-
 TEST (SingleCommandTests, pwdWhitespace){
         Tokenizer * tokeniz = new Tokenizer("     pwd      ");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
 	exec->isValid();
 	exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -34,7 +30,9 @@ TEST (SingleCommandTests, pwdWhitespace){
 
 TEST (SingleCommandTests, echoQuotes){
         Tokenizer * tokeniz = new Tokenizer("echo \"&& || ; #\"");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
 	exec->isValid();
 	exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -42,7 +40,9 @@ TEST (SingleCommandTests, echoQuotes){
 
 TEST (SingleCommandTests, gitStatus){
         Tokenizer * tokeniz = new Tokenizer("git status");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
 	exec->isValid();
 	exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -50,7 +50,9 @@ TEST (SingleCommandTests, gitStatus){
 
 TEST (SingleCommandTests, mkdirZTEST){
         Tokenizer * tokeniz = new Tokenizer("mkdir ZTEST");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
 	exec->isValid();
 	exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -58,7 +60,9 @@ TEST (SingleCommandTests, mkdirZTEST){
 
 TEST (SingleCommandTests, deleteZTEST){
         Tokenizer * tokeniz = new Tokenizer("rm -rf ZTEST");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
 	exec->isValid();
 	exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -66,7 +70,9 @@ TEST (SingleCommandTests, deleteZTEST){
 
 TEST (SingleCommandTests, invalidCommand1){
         Tokenizer * tokeniz = new Tokenizer("ls -j");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);
@@ -74,7 +80,9 @@ TEST (SingleCommandTests, invalidCommand1){
 
 TEST (SingleCommandTests, invalidCommand2){
         Tokenizer * tokeniz = new Tokenizer("pog");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);
@@ -82,7 +90,9 @@ TEST (SingleCommandTests, invalidCommand2){
 
 TEST (SingleCommandTests, invalidCommand3){
         Tokenizer * tokeniz = new Tokenizer("makedirectory ls");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);

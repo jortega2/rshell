@@ -18,6 +18,17 @@ void OrToken::setRight(Token * r){
         right = r;
 }
 
+Token* OrToken::getLeft(){
+        return left;
+}
+
+Token* OrToken::getRight(){
+        return right;
+}
+
+int OrToken::isLeaf(){
+	return 0;
+}
 
 int OrToken::execute(){
 	if (left == nullptr | right == nullptr ){

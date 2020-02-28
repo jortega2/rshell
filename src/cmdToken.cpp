@@ -18,6 +18,19 @@ CmdToken::CmdToken(std::string input) {
 	args.push_back(NULL);
 			
 }
+
+int CmdToken::isLeaf() {
+	return 1;
+}
+
+Token* CmdToken::getLeft(){
+        return nullptr;
+}
+
+Token* CmdToken::getRight(){
+        return nullptr;
+}
+
 int CmdToken::execute() {
 	//if execvp throws in error, ret will be assigned 0. otherwise it will be 1.
 	//this is used for connector logic, as well as unit tests.

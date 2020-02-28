@@ -14,6 +14,11 @@ class CmdToken : public Token {
 	public:
 		CmdToken(std::string input);
 		virtual int execute();
+		virtual int isLeaf();
+		virtual Token* getLeft();
+		virtual Token* getRight();
+		virtual void setLeft(Token* l){};
+		virtual void setRight(Token * r){};
 		std::vector<std::string> returnVector();
 };
 

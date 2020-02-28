@@ -7,12 +7,11 @@
 
 class Executor {
 private:
-	std::vector<std::string> arguments;
-	std::vector<std::string> connectors;
+	std::vector<std::string> args;
 	std::vector<Token *> tokens;
 	bool valid;
 public:
-	Executor(std::vector<std::string> args, std::vector<std::string> conns);
+	Executor(std::vector<std::string> args);
 	void createTokens();
 	bool isValid();
 	int execute();

@@ -18,6 +18,18 @@ void SemiToken::setRight(Token * r){
         right = r;
 }
 
+Token* SemiToken::getLeft(){
+        return left;
+}
+
+Token* SemiToken::getRight(){
+        return right;
+}
+
+int SemiToken::isLeaf(){
+	return 0;
+}
+
 int SemiToken::execute(){
 	if (left == nullptr || right == nullptr){
 		ret = 0;

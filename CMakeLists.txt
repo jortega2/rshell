@@ -14,7 +14,7 @@ if(Boost_FOUND)
 	src/main.cpp 
 	src/Tokenizer.cpp 
 	src/cmdToken.cpp
-	
+	src/Executor.cpp
 	src/andToken.cpp
 	src/orToken.cpp
 	src/semiToken.cpp
@@ -22,13 +22,13 @@ if(Boost_FOUND)
 	target_link_libraries(rshell ${Boost_LIBRARIES})
 	add_executable(test 
 	unit_tests/unit_tests.cpp
-
+	integration_tests/single_command_tests.cpp
 
 
 
 	src/Tokenizer.cpp
 	src/cmdToken.cpp
-
+	src/Executor.cpp
 	src/andToken.cpp
 	src/orToken.cpp
 	src/semiToken.cpp

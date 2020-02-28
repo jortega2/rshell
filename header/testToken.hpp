@@ -15,6 +15,11 @@ class TestToken : public Token {
 		TestToken(std::string input);
 		void parse();
 		virtual int execute();
+		virtual int isLeaf();
+		virtual Token* getRight();
+		virtual Token* getLeft();
+		virtual void setRight(Token* l){};
+		virtual void setLeft(Token* r){};
 		std::string getStrings(std::string which);
 		
 };

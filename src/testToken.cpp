@@ -60,6 +60,18 @@ void TestToken::parse(){
 	std::cout << "file: " <<  file << std::endl;*/
 }
 
+int TestToken::isLeaf(){
+	return 1;
+}
+
+Token* TestToken::getLeft(){
+        return nullptr;
+}
+
+Token* TestToken::getRight(){
+        return nullptr;
+}
+
 int TestToken::execute(){
 	struct stat cmd;
 	char* myCmd = (char*)file.c_str();

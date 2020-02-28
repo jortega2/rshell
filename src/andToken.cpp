@@ -18,6 +18,18 @@ void AndToken::setRight(Token * r){
         right = r;
 }
 
+Token* AndToken::getLeft(){
+	return left;
+}
+
+Token* AndToken::getRight(){
+	return right;
+}
+
+int AndToken::isLeaf(){
+	return 0;
+}
+
 int AndToken::execute(){
 	if (left == nullptr || right == nullptr){
 		ret = 0;

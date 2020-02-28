@@ -3,54 +3,59 @@
 #include "../header/andToken.hpp"
 #include "../header/orToken.hpp"
 #include "../header/semiToken.hpp"
+#include "../header/testToken.hpp"
 
 Executor::Executor(std::vector<std::string> args) {
-	arguments = args;
+	this->args = args;
 }
 
 void Executor::createTokens() {
-	//create the tree of commands, but only if connector usage is valid
-	/*if (valid == true){
-		for (int i = 0; i <arguments.size(); i++){
-			CmdToken * tok = new CmdToken(arguments[i]);
+	for (int i = 0; i < args.size(); i ++){
+		if (args[i] == "&&"){
+			AndToken * tok = new AndToken();
+			tokens.push_back(tok);
+		} else if (args[i] == "||"){
+			OrToken * tok = new OrToken();
+			tokens.push_back(tok);
+		} else if (args[i] == ";"){
+			SemiToken * tok = new SemiToken();
+			tokens.push_back(tok);
+		} else if ((args[i][0] == '[' && args[i][args[i].size()-1] == ']' && args[i][1] == ' ' && args[i][args[i].size()-2] == ' ') || (args[i][0] == 't' && args[i][1] == 'e' && args[i][2] == 's' && args[i][3] == 't')) {
+			TestToken * tok = new TestToken(args[i]);
+			tokens.push_back(tok);
+		} else {
+			CmdToken * tok = new CmdToken(args[i]);
 			tokens.push_back(tok);
 		}
-		for (int i = 0; i < connectors.size(); i++){
-                	if (((i+1) == connectors.size()) && (connectors.back() == ";")){
-                        	if ((arguments.size() - connectors.size()) == 1){
-                                        Token * tok =  new SemiToken(tokens.back(), tokens[i+1]);
-					tokens.push_back(tok);
-				}
-                        	else if ((arguments.size() - connectors.size()) == 0){
-                                        Token * tok = new SemiToken(tokens.back());
-					tokens.push_back(tok);
-                        	}	
-			}else if (i == 0){
-                    		if (connectors[i] == "&&"){
-                        		Token * tok = new AndToken(tokens[i], tokens[i+1]);
-                        		tokens.push_back(tok);
-                    		}else if (connectors[i] == "||"){
-                        		Token * tok = new OrToken(tokens[i], tokens[i+1]);
-                        		tokens.push_back(tok);
-                    	}else if (connectors[i] == ";"){
-                        		Token * tok = new SemiToken(tokens[i], tokens[i+1]);
-                        		tokens.push_back(tok);
-                    	}
-		 
-			}else {
-                        	if (connectors[i] == "&&"){
-                            		Token * tok = new AndToken(tokens.back(), tokens.at(i+1));
-                            		tokens.push_back(tok);
-                        	} else if (connectors[i] == "||"){
-                            		Token * tok = new OrToken(tokens.back(), tokens.at(i+1));
-                            		tokens.push_back(tok);
-                        	} else if (connectors[i] == ";"){
-                            		Token * tok = new SemiToken(tokens.back(), tokens.at(i+1));
-                            		tokens.push_back(tok);
-                        	}
-                	}
-		}
-	}*/
+	}
+	
+	int i = 0;
+	for ( int j = 1; j < tokens.size();){
+		if (tokens[i]->isLeaf() == 1) {
+			i++;
+		} else if (tokens[i]->getLeft() == nullptr){
+			tokens[i]->setLeft(tokens[j]);
+			
+			if (tokens[j]->isLeaf() == 0){
+				i++;
+				j++;
+			} else if (tokens[j]->isLeaf() == 1){
+				j++;
+			}
+		} else if (tokens[i]->getRight() == nullptr){
+			tokens[i]->setRight(tokens[j]);
+			
+			if (tokens[j]->isLeaf() == 0){
+				i++;
+				j++;
+			} else if (tokens[j]->isLeaf() == 1) {
+				i--;
+				j++;
+			}
+		} else {
+			i++;
+		}			
+	}	
 }
 
 bool Executor::isValid(){
@@ -74,9 +79,8 @@ bool Executor::isValid(){
 }
 int Executor::execute(){
 //ret represents if execvp called properly or not. If all commands execute properly execute will return 1, 0 otherwise.
-int ret = 0;
-	if (valid == true){
+	//if (valid == true){
 		//ret = tokens.back()->execute();
-	}
-	return ret;
+	//}
+	return tokens.front()->execute();
 }
