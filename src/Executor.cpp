@@ -10,7 +10,15 @@ Executor::Executor(std::vector<std::string> args) {
 }
 
 void Executor::createTokens() {
-	for (int i = 0; i < args.size(); i ++){
+	std::vector<int> prev;
+	//get positions of connectors for indexing
+	for (int i = 0; i < args.size(); i++){
+		if (args[i] == "&&" || args[i] == ";" || args[i] == "||"){
+			prev.push_back(i);
+		}
+	}
+	//create tokens
+	for (int i = 0; i < args.size(); i++){
 		if (args[i] == "&&"){
 			AndToken * tok = new AndToken();
 			tokens.push_back(tok);
@@ -28,7 +36,7 @@ void Executor::createTokens() {
 			tokens.push_back(tok);
 		}
 	}
-	
+	//make tree
 	int i = 0;
 	for ( int j = 1; j < tokens.size();){
 		if (tokens[i]->isLeaf() == 1) {
@@ -49,11 +57,24 @@ void Executor::createTokens() {
 				i++;
 				j++;
 			} else if (tokens[j]->isLeaf() == 1) {
-				i--;
 				j++;
+				//go back to lowest unfinshed composite
+				for (int k = prev.size() - 1; k >= 0; k--){
+					if (prev[k] < i){
+					if (tokens[prev[k]]->getLeft() == nullptr || tokens[prev[k]]->getRight() == nullptr){
+						i = prev[k];
+						break;
+					}
+					}
+				}
 			}
 		} else {
-			i++;
+			if (i < tokens.size() - 1){
+				i++;
+			} else {
+				std::cout << "failed gracefully...\n";
+				break;
+			}
 		}			
 	}	
 }
