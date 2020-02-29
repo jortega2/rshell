@@ -55,6 +55,19 @@ void Tokenizer::parse(){
                 }
         } while (arg != "");
 	
+	//delete empty arguments
+	for (int i = 0; i < temp.size(); i++){
+        	int whitespace = 0;
+        	for (int j = 0; j <temp[i].size(); j++){
+            		if (isspace(temp[i][j])){
+                  		whitespace++;
+            		}
+        	}
+        	if (whitespace == temp[i].size()){
+            		temp.erase(temp.begin()+i);
+        	}	
+    	}
+
 	//delete leading and trailing white space
 	for (int i = 0; i < temp.size(); i++){
                 boost::smatch ws;

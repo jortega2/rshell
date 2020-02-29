@@ -106,8 +106,8 @@ int TestToken::execute(){
 			ret = 0;
 		}
 	} else {
-		std::cout << "something went terribly wrong...\n";
-		ret = 2;
+		std::cout << "invalid flag\n";
+		ret = 0;
 	}
 	
 	
@@ -116,14 +116,14 @@ int TestToken::execute(){
 }
 
 std::string TestToken::getStrings(std::string which){
-	std::string ret;
+	std::string rets;
 	
 	if (which == "flag"){
-		ret = flag;
+		rets = flag;
 	} else if (which == "file"){
-		ret = file;
+		rets = file;
 	}
-	return ret;
+	return rets;
 }
 	
 
