@@ -3,23 +3,22 @@
 #include "../header/Executor.hpp"
 
 int main() {
-	for (int i = 0; i < 5 ; i++){
+	for (int i = 0; i < 3 ; i++){
 	std::cout << "[rshell]$ ";
 	std::string userInput;
 	std::getline(std::cin, userInput);
 	Tokenizer* command = new Tokenizer(userInput);
 	command->parse();
 	command->shuntingYardAlgorithm();
-	std::vector<std::string> myvec;
+	/*std::vector<std::string> myvec;
 	myvec = command->returnArgs();
 	for (int i = 0; i < myvec.size(); i++){
 		std::cout << myvec[i] << std::endl;
-	}
+	}*/
 	Executor* exec = new Executor(command->returnArgs());
-	//if (exec->isValid()){
-		exec->createTokens();
-		exec->execute();
-	//}
+	exec->isValid();
+	exec->createTokens();
+	exec->execute();
 	}
 	return 0;
 }
