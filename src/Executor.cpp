@@ -83,7 +83,7 @@ bool Executor::isValid(){
 	//check for valid use of connectors. for 3 connectors there should be 4 arguments to be valid.
 	//unless the last connector is ; in which case connectors and arguments can be equal
 	valid = true;
-	int cons;
+	int cons = 0;
 	if (!(args.empty())){
 		for (int i = 0; i < args.size(); i++) {
 			if (args[i] == "&&" || args[i] == ";" || args[i] == "||"){

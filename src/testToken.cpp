@@ -75,42 +75,43 @@ Token* TestToken::getRight(){
 int TestToken::execute(){
 	struct stat cmd;
 	char* myCmd = (char*)file.c_str();
-	
-	stat(myCmd, &cmd);
 
-	if (flag == "-f"){
-		if ((S_ISREG(cmd.st_mode) != 0)){
-			std::cout << "(true)\n";
-			ret = 1;
+	if (stat(myCmd, &cmd)>=0){
+		if (flag == "-f"){
+			if ((S_ISREG(cmd.st_mode) != 0)){
+				std::cout << "(true)\n";
+				ret = 1;
+			} else {
+				std::cout << "(false)\n";
+				ret = 0;
+			}
+		} else if (flag == "-d"){
+                	if ((S_ISDIR(cmd.st_mode) != 0)){
+                        	std::cout << "(true)\n";
+				ret = 1;
+                	} else {
+                        	std::cout << "(false)\n";
+				ret = 0;
+                	}
+		} else if (flag == "-e" || flag == ""){
+			if ((S_ISREG(cmd.st_mode) != 0)){
+				std::cout << "(true)\n";
+				ret = 1;
+			} else if ((S_ISDIR(cmd.st_mode) != 0)){
+				std::cout << "(true)\n";
+				ret = 1;	
+			} else {
+				std:: cout << "(false)\n";
+				ret = 0;
+			}
 		} else {
-			std::cout << "(false)\n";
+			std::cout << "invalid flag\n";
 			ret = 0;
-		}
-	} else if (flag == "-d"){
-                if ((S_ISDIR(cmd.st_mode) != 0)){
-                        std::cout << "(true)\n";
-			ret = 1;
-                } else {
-                        std::cout << "(false)\n";
-			ret = 0;
-                }
-	} else if (flag == "-e" || flag == ""){
-		if ((S_ISREG(cmd.st_mode) != 0)){
-			std::cout << "(true)\n";
-			ret = 1;
-		} else if ((S_ISDIR(cmd.st_mode) != 0)){
-			std::cout << "(true)\n";
-			ret = 1;	
-		} else {
-			std:: cout << "(false)\n";
-			ret = 0;
-		}
-	} else {
-		std::cout << "invalid flag\n";
+		}	
+	} else { 
+		std::cout << "(false)\n";
 		ret = 0;
 	}
-	
-	
 	
 	return ret;
 }
