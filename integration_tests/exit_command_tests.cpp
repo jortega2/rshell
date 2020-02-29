@@ -1,5 +1,5 @@
-#ifndef __MULTIPLE_COMMAND_TESTS_CPP__
-#define __MULTIPLE_COMMAND_TESTS_CPP__
+#ifndef __EXIT_COMMAND_TESTS_CPP__
+#define __EXIT_COMMAND_TESTS_CPP__
 #include "gtest/gtest.h"
 #include "../header/Tokenizer.hpp"
 #include "../header/Executor.hpp"
@@ -18,7 +18,9 @@
 
 TEST (ExitCommandTests, ORexit){
         Tokenizer * tokeniz = new Tokenizer("echo hey || exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+	tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -26,7 +28,9 @@ TEST (ExitCommandTests, ORexit){
 
 TEST (ExitCommandTests, pwdORexitORexit){
         Tokenizer * tokeniz = new Tokenizer("pwd ||  exit ||   exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -34,7 +38,9 @@ TEST (ExitCommandTests, pwdORexitORexit){
 
 TEST (ExitCommandTests, UpperCaseExit){
         Tokenizer * tokeniz = new Tokenizer("EXIT");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);
@@ -42,7 +48,9 @@ TEST (ExitCommandTests, UpperCaseExit){
 
 TEST (ExitCommandTests, fiveCommandsExit){
         Tokenizer * tokeniz = new Tokenizer("echo 1 && echo 2 || exit ;  echo 1");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -50,7 +58,9 @@ TEST (ExitCommandTests, fiveCommandsExit){
 
 TEST (ExitCommandTests, invalidConnectorsExit){
         Tokenizer * tokeniz = new Tokenizer(" pwd && && exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);
@@ -58,7 +68,9 @@ TEST (ExitCommandTests, invalidConnectorsExit){
 
 /*TEST (ExitCommandTests, ANDwithWhiteSpace){
         Tokenizer * tokeniz = new Tokenizer("echo hey &&       exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -66,7 +78,9 @@ TEST (ExitCommandTests, invalidConnectorsExit){
 
 /*TEST (ExitCommandTests, simpleExit){
         Tokenizer * tokeniz = new Tokenizer("exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -74,7 +88,9 @@ TEST (ExitCommandTests, invalidConnectorsExit){
 
 /*TEST (ExitCommandTests, semicolonExit){
         Tokenizer * tokeniz = new Tokenizer("echo hey ;       exit ;");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -82,7 +98,9 @@ TEST (ExitCommandTests, invalidConnectorsExit){
 
 /*TEST (ExitCommandTests, invalidORexit){
         Tokenizer * tokeniz = new Tokenizer("echaz hey || exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);

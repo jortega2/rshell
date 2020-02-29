@@ -89,3 +89,13 @@ TEST (testTokenCmds, missingNoFlagCommmand) {
         EXPECT_EQ(test->execute(), 0);
 }
 
+TEST (testTokenCmds, missingPath) {
+        TestToken* test = new TestToken("test ");
+        EXPECT_EQ(test->execute(), 0);
+}
+
+TEST (testTokenCmds, InvalidFlag) {
+        TestToken* test = new TestToken("test -z  CMa.txt");
+        EXPECT_EQ(test->execute(), 0);
+}
+

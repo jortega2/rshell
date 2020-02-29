@@ -10,7 +10,9 @@
 
 TEST (CommentedCommandTests, lsCommentExit){
         Tokenizer * tokeniz = new Tokenizer("ls #exit");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -18,7 +20,9 @@ TEST (CommentedCommandTests, lsCommentExit){
 
 TEST (CommentedCommandTests, EchoComment){
         Tokenizer * tokeniz = new Tokenizer("echo 1 2 # 3 4 5 6 ");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -26,7 +30,9 @@ TEST (CommentedCommandTests, EchoComment){
 
 TEST (CommentedCommandTests, CommentInQuotes){
         Tokenizer * tokeniz = new Tokenizer("echo \"1 2 # 3\" # 4 5 6");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -34,7 +40,9 @@ TEST (CommentedCommandTests, CommentInQuotes){
 
 TEST (CommentedCommandTests, commentOnly){
         Tokenizer * tokeniz = new Tokenizer("#comment");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);

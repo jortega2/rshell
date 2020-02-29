@@ -10,7 +10,9 @@
 
 TEST (MultipleCommandTests, AND){
         Tokenizer * tokeniz = new Tokenizer("echo hey && echo there");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -18,7 +20,9 @@ TEST (MultipleCommandTests, AND){
 
 TEST (MultipleCommandTests, OR){
         Tokenizer * tokeniz = new Tokenizer("echo hey || echo there");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -26,7 +30,9 @@ TEST (MultipleCommandTests, OR){
 
 TEST (MultipleCommandTests, SemiColon){
         Tokenizer * tokeniz = new Tokenizer("echo hey ; echo there");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -34,7 +40,9 @@ TEST (MultipleCommandTests, SemiColon){
 
 TEST (MultipleCommandTests, ORnAND){
         Tokenizer * tokeniz = new Tokenizer("echo 1 || echo 2 && pwd");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
@@ -42,23 +50,29 @@ TEST (MultipleCommandTests, ORnAND){
 
 TEST (MultipleCommandTests, ANDnSemiColon){
         Tokenizer * tokeniz = new Tokenizer("ls && pwd ;");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
-        EXPECT_EQ(exec->execute(), 1);
+        EXPECT_EQ(exec->execute(), 0);
 }
 
 TEST (MultipleCommandTests, edgeCaseWhiteSpace3Connectors){
         Tokenizer * tokeniz = new Tokenizer("     echo        1 ;        echo    2 &&          echo        3 || echo               4");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);
 }
 
 TEST (MultipleCommandTests, edgeCaseTooManyConnectors){
-        Tokenizer * tokeniz = new Tokenizer("echo hey && echo there && " );
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+        Tokenizer * tokeniz = new Tokenizer("echo hey &&  echo there ||   ");
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);
@@ -66,7 +80,9 @@ TEST (MultipleCommandTests, edgeCaseTooManyConnectors){
 
 TEST (MultipleCommandTests, edgeCaseConnectorsOnly){
         Tokenizer * tokeniz = new Tokenizer("&& || ;");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 0);
@@ -74,7 +90,9 @@ TEST (MultipleCommandTests, edgeCaseConnectorsOnly){
 
 TEST (MultipleCommandTests, assignment2SampleCommand){
         Tokenizer * tokeniz = new Tokenizer("ls -a; echo hello && mkdir ztest && rm -rf ztest || echo world ; git status");
-        Executor * exec = new Executor (tokeniz->returnArgs(), tokeniz->returnConns());
+	tokeniz->parse();
+        tokeniz->shuntingYardAlgorithm();
+        Executor * exec = new Executor (tokeniz->returnArgs());
         exec->isValid();
         exec->createTokens();
         EXPECT_EQ(exec->execute(), 1);

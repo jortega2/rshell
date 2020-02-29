@@ -10,30 +10,26 @@
 
 
 TEST (ExecutorIsValid, 2Args1Connector) {
-	std::vector<std::string> args {"ls -a", "echo pog"};
-	std::vector<std::string> conns {"||"};
-	Executor* test = new Executor(args, conns);
+	std::vector<std::string> args {"ls -a","&&", "echo pog"};
+	Executor* test = new Executor(args);
 	EXPECT_EQ(test->isValid(), 1);
 }
 
 TEST (ExecutorIsValid, 5Args4Connector) {
-        std::vector<std::string> args {"ls -a", "echo hello", "mkdir test", "echo world", "git status"};
-        std::vector<std::string> conns {";", "&&", "||", ";"};
-        Executor* test = new Executor(args, conns);
+        std::vector<std::string> args {"ls -a","&&", "echo hello",";", "mkdir test","||"," echo world","&&", "git status"};
+        Executor* test = new Executor(args);
         EXPECT_EQ(test->isValid(), 1);
 }
 
-TEST (ExecutorIsValid, 3Args4Connector) {
-        std::vector<std::string> args {"ls -a", "echo hello", "mkdir test"};
-        std::vector<std::string> conns {";", "&&", "||", ";"};
-        Executor* test = new Executor(args, conns);
+TEST (ExecutorIsValid, 3Args3Connector) {
+        std::vector<std::string> args {"ls -a","&&", "echo hello",";", "mkdir test", "||"};
+        Executor* test = new Executor(args);
         EXPECT_EQ(test->isValid(), 0);
 }
 
-TEST (ExecutorIsValid, 5Argse5Connector) {
-	std::vector<std::string> args {"ls -a", "echo hello", "mkdir test", "echo world", "git status"};
-        std::vector<std::string> conns {";", "&&", "||", ";", "&&"};
-        Executor* test = new Executor(args, conns);
+TEST (ExecutorIsValid, 5Args3Connector) {
+	std::vector<std::string> args {"ls -a","&&", "echo hello","||", "mkdir test",";", "echo world", "git status"};
+        Executor* test = new Executor(args);
         EXPECT_EQ(test->isValid(), 0);
 }
 #endif
