@@ -3,11 +3,6 @@
 #include "gtest/gtest.h"
 #include "../header/Tokenizer.hpp"
 #include "../header/Executor.hpp"
-#include "../header/cmdToken.hpp"
-#include "../header/andToken.hpp"
-#include "../header/orToken.hpp"
-#include "../header/semiToken.hpp"
-#include "../header/testToken.hpp"
 
 TEST (TestLiteralTest, FullDirectoryAND){
         Tokenizer * tokeniz = new Tokenizer("test -e header/andToken.hpp  && echo \"path exists\"");

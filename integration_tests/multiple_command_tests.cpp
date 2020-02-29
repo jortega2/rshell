@@ -3,10 +3,6 @@
 #include "gtest/gtest.h"
 #include "../header/Tokenizer.hpp"
 #include "../header/Executor.hpp"
-#include "../header/cmdToken.hpp"
-#include "../header/andToken.hpp"
-#include "../header/orToken.hpp"
-#include "../header/semiToken.hpp"
 
 TEST (MultipleCommandTests, AND){
         Tokenizer * tokeniz = new Tokenizer("echo hey && echo there");

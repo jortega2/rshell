@@ -4,6 +4,9 @@
 #include "gtest/gtest.h"
 #include "../header/testToken.hpp"
 
+//testing for parsing and exeucte function.
+//Execute function returns 1 if path is valid and flag criteria is met. 
+//Execute returns 0 otherwise.
 
 TEST (testTokenParse, genericCommmand) {	
 	TestToken* test = new TestToken("test -d path/to/file");

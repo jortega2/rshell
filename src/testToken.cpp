@@ -17,8 +17,8 @@ void TestToken::parse(){
 	boost::regex getFlag("^\\s*-(\\w)+");
 	boost::regex leadingSpace("^[ \t]+");
 	boost::regex trailingSpace("[ \t]+$");
-	//boost::regex whiteSpace("[^\\s]+");
-	//delete first word, should only ever be test because of tokenizer
+	
+	//parse command into flag and command strings, methods vary depending on format
 	boost::smatch word, openB, closedB, fl, ws1, ws2;
 	flag = "";
 	if (boost::regex_search(file, word, firstWord)){
@@ -35,12 +35,7 @@ void TestToken::parse(){
 		flag = fl.str(0);
 		file = fl.suffix();
         }
-	/*if (flag != ""){
-                std::cout << "flag: " << flag << std::endl;
-        }
-
-        std::cout << "file: " << file << std::endl;*/
-
+	//delete leading/trailing whitespace
 	if (boost::regex_search(file, ws1, leadingSpace)){
 		file = ws1.suffix();
 	}
@@ -53,11 +48,6 @@ void TestToken::parse(){
 	if (boost::regex_search(flag, ws2, trailingSpace)){
                 flag = ws2.prefix();
         }
-	/*if (flag != ""){
-		std::cout << "flag: " <<  flag << std::endl;
-	}
-	
-	std::cout << "file: " <<  file << std::endl;*/
 }
 
 int TestToken::isLeaf(){

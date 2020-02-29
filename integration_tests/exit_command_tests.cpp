@@ -3,10 +3,6 @@
 #include "gtest/gtest.h"
 #include "../header/Tokenizer.hpp"
 #include "../header/Executor.hpp"
-#include "../header/cmdToken.hpp"
-#include "../header/andToken.hpp"
-#include "../header/orToken.hpp"
-#include "../header/semiToken.hpp"
 
 //note: my exit command triggers in the exec->exeute() and the ./test executable stops after the first test block.
 //so the expect_eq function technically never finishes, but you can see the proper functionality when you run .tests
