@@ -88,4 +88,12 @@ TEST (TokenizerShuntingYard, NestedParenthesis) {
         test->shuntingYardAlgorithm();
         EXPECT_EQ(test->returnArgs(), cmd);
 }
+
+TEST (TokenizerShuntingYard, NestedParenthesis2) {
+        std::vector<std::string> cmd{"echo A"};
+        Tokenizer* test = new Tokenizer("(((((((echo A)))))");
+        test->parse();
+        test->shuntingYardAlgorithm();
+        EXPECT_EQ(test->returnArgs(), cmd);
+}
 #endif
