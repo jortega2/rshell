@@ -1,5 +1,5 @@
-#ifndef __SEMITOKEN_TESTS_HPP__
-#define __SEMITOKEN_TESTS_HPP__
+#ifndef __SEMITOKEN_TESTS_CPP__
+#define __SEMITOKEN_TESTS_CPP__
 #include "../header/semiToken.hpp"
 #include "gtest/gtest.h"
 #include "../header/cmdToken.hpp"

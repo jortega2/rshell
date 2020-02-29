@@ -1,4 +1,5 @@
-
+#ifndef __TESTTOKEN_TEST_HPP__
+#define __TESTTOKEN_TEST_HPP__
 
 #include "gtest/gtest.h"
 #include "../header/testToken.hpp"
@@ -99,3 +100,4 @@ TEST (testTokenCmds, InvalidFlag) {
         EXPECT_EQ(test->execute(), 0);
 }
 
+#endif
