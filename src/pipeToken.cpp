@@ -64,7 +64,7 @@ int PipeToken::execute(){
 	FILE* in_pipe = popen(left->stringify().c_str(), r.c_str());
 	FILE* out_pipe = popen(dir.c_str(), w.c_str());
 	
-	if ((in_pipe != nullptr) && (in_pipe != nullptr)){
+	if ((in_pipe != nullptr) && (out_pipe != nullptr)){
 		while (fgets(buffer,PATH_MAX, in_pipe) != nullptr){
 			fputs(buffer, out_pipe);
 		}
