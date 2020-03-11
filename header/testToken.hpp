@@ -8,11 +8,13 @@
 
 class TestToken : public Token {
 	private:
+		std::string arg;
 		std::string file;
 		std::string flag;
 		int ret;
 	public:
 		TestToken(std::string input);
+		virtual std::string stringify();
 		void parse();
 		virtual int execute();
 		virtual int isLeaf();

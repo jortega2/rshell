@@ -13,6 +13,7 @@ TEST (andTokenTest, lsANDechoSuccess){
 	CmdToken* right = new CmdToken ("echo success");
 	AndToken* test = new AndToken(left, right);
 	EXPECT_EQ(test->execute(), 1); 
+	EXPECT_EQ(test->stringify(), "ls && echo success");
 }
 
 TEST (andTokenTest, invalidANDvalid){
@@ -20,6 +21,7 @@ TEST (andTokenTest, invalidANDvalid){
         CmdToken* right = new CmdToken ("echo failure");
         AndToken* test = new AndToken(left, right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "ls -j && echo failure");
 }
 
 TEST (andTokenTest, validANDinvalid){
@@ -27,6 +29,7 @@ TEST (andTokenTest, validANDinvalid){
         CmdToken* right = new CmdToken ("echa ?");
         AndToken* test = new AndToken(left, right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "ls && echa ?");
 }
 
 TEST (andTokenTest, invalidANDinvalid){
@@ -34,6 +37,7 @@ TEST (andTokenTest, invalidANDinvalid){
         CmdToken* right = new CmdToken ("gers");
         AndToken* test = new AndToken(left, right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "pog && gers");
 }
 
 TEST (andTokenTest, nestedAnd){
@@ -44,6 +48,7 @@ TEST (andTokenTest, nestedAnd){
 	AndToken* nested = new AndToken(left,right);
         AndToken* test = new AndToken(nested, right2);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "mkdir folder && ls && rm -rf folder");
 }
 
 TEST (andTokenTest, doubleNestedAnd){
@@ -55,6 +60,7 @@ TEST (andTokenTest, doubleNestedAnd){
 	AndToken* nested2 = new AndToken(nested1, right2);
         AndToken* test = new AndToken(nested2, right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "mkdir zfolder && ls && rm -rf zfolder && ls");
 }
 
 TEST (andTokenTest, emptyConnectorTest) {
@@ -64,6 +70,7 @@ TEST (andTokenTest, emptyConnectorTest) {
 	test->setLeft(left);
 	test->setRight(right);
 	EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "ls && pwd");
 }
 
 TEST (andTokenTest, NullNodeTest) {
@@ -71,6 +78,7 @@ TEST (andTokenTest, NullNodeTest) {
         AndToken* test = new AndToken();
         test->setLeft(left);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "");
 }
 
 #endif

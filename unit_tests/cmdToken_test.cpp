@@ -19,33 +19,39 @@ TEST (cmdTokenParse, genericCommmand) {
 	std::vector <std::string> expected {"ls", "-a"};
 	CmdToken* test = new CmdToken("ls -a");
 	EXPECT_EQ(test->returnVector(), expected);
+	EXPECT_EQ(test->stringify(), "ls -a");
 }
 
 TEST (cmdTokenParse, HandlesWhiteSpace) {
         std::vector <std::string> expected {"ls", "-a"};
         CmdToken* test = new CmdToken("       ls         -a        ");
         EXPECT_EQ(test->returnVector(), expected);
+	EXPECT_EQ(test->stringify(), "       ls         -a        ");
 }
 
 TEST (cmdTokenParse, HandlesQuotes) {
         std::vector <std::string> expected {"echo", "    testing testing 1 2 3    "};
         CmdToken* test = new CmdToken("echo\"    testing testing 1 2 3    \"");
         EXPECT_EQ(test->returnVector(), expected);
+	EXPECT_EQ(test->stringify(), "echo\"    testing testing 1 2 3    \"");
 }
 
 TEST (CmdTokenTest, ls){
 	CmdToken* test = new CmdToken("ls");
 	EXPECT_EQ(test->execute(), 1); 
+	EXPECT_EQ(test->stringify(), "ls");
 }
 
 TEST (CmdTokenTest, lsj){
         CmdToken* test = new CmdToken("ls -j");
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "ls -j");
 }
 
 TEST (CmdTokenTest, bigEcho){
         CmdToken* test = new CmdToken("echo parsing parsing 1 2 3 i love parsing");
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "echo parsing parsing 1 2 3 i love parsing");
 }
 
 TEST (CmdTokenTest, pwdAndWhiteSpace){
@@ -56,21 +62,25 @@ TEST (CmdTokenTest, pwdAndWhiteSpace){
 TEST (CmdTokenEdgeCase, invalidCommand ){
         CmdToken* test = new CmdToken("echa parsing parsing 1 2 3 i love parsing");
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "echa parsing parsing 1 2 3 i love parsing");
 }
 
 TEST (CmdTokenEdgeCase, smashedKeyboardInput){
         CmdToken* test = new CmdToken("adjqnqildl13jgligmk2mng1@*!&Fnlkavekg3");
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "adjqnqildl13jgligmk2mng1@*!&Fnlkavekg3");
 }
 
 TEST (CmdTokenEdgeCase, NoInput){
         CmdToken* test = new CmdToken("");
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "");
 }
 
 TEST (CmdTokenEdgeCase, InputC){
 	CmdToken* test = new CmdToken("^C");
 	EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "^C");
 }
 
 #endif

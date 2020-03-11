@@ -10,6 +10,15 @@ OrToken::OrToken(){
 	right = nullptr;
 }
 
+std::string OrToken::stringify(){
+	if (left != nullptr && right != nullptr){
+        	return left->stringify() + " || " + right->stringify();
+	} else {
+		return "\0";
+	}
+}
+
+
 void OrToken::setLeft(Token * l){
         left = l;
 }

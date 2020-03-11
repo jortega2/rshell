@@ -101,9 +101,9 @@ void Tokenizer::shuntingYardAlgorithm(){
                         temp[i] = "(";
                 }
         }
-        /*for (int i = 0; i < temp.size(); i++){
+        for (int i = 0; i < temp.size(); i++){
                 std::cout << temp[i] << std::endl;
-        }*/
+        }
 	
 
 	std::stack<std::string> myStack;

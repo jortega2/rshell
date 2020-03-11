@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 CmdToken::CmdToken(std::string input) { 
+	arg = input;
 	boost::regex cmdRegEx("(?<=\")[^\"]*(?=\")|[^\\s\"]+");
 	ret = 1;
 	boost::smatch tempargs;
@@ -22,6 +23,11 @@ CmdToken::CmdToken(std::string input) {
 int CmdToken::isLeaf() {
 	return 1;
 }
+
+std::string CmdToken::stringify(){
+        return arg;
+}
+
 
 Token* CmdToken::getLeft(){
         return nullptr;

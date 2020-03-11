@@ -12,6 +12,7 @@ TEST (SemiColonTwoCommand, validSCvalid){
 	CmdToken* right = new CmdToken ("echo success");
 	SemiToken* test = new SemiToken(left, right);
 	EXPECT_EQ(test->execute(), 1); 
+	EXPECT_EQ(test->stringify(), "ls ; echo success");
 }
 
 TEST (SemiColonTwoCommand, invalidSCvalid){
@@ -19,6 +20,7 @@ TEST (SemiColonTwoCommand, invalidSCvalid){
         CmdToken* right = new CmdToken ("echo pog");
         SemiToken* test = new SemiToken(left, right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "pog ; echo pog");
 }
 
 TEST (SemiColonTwoCommand, validSCinvalid){
@@ -26,6 +28,7 @@ TEST (SemiColonTwoCommand, validSCinvalid){
         CmdToken* right = new CmdToken ("pog");
         SemiToken* test = new SemiToken(left, right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "echo pog ; pog");
 }
 
 TEST (SemiColonTwoCommand, invalidSinCvalid){
@@ -33,6 +36,7 @@ TEST (SemiColonTwoCommand, invalidSinCvalid){
         CmdToken* right = new CmdToken ("gers");
         SemiToken* test = new SemiToken(left, right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "pog ; gers");
 }
 
 TEST (SemiColonTokenTest, emptyConnectorTest) {
@@ -42,6 +46,7 @@ TEST (SemiColonTokenTest, emptyConnectorTest) {
         test->setLeft(left);
         test->setRight(right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "ls ; pwd");
 }
 
 TEST (SemiColonTokenTest, EmptyNodesTest) {
@@ -49,6 +54,7 @@ TEST (SemiColonTokenTest, EmptyNodesTest) {
         SemiToken* test = new SemiToken();
         test->setRight(right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "");
 }
 
 #endif

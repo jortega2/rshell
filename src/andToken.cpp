@@ -10,6 +10,15 @@ AndToken::AndToken() {
 	right = nullptr;
 }
 
+std::string AndToken::stringify(){
+	if ( right != nullptr && left != nullptr){
+	        return left->stringify() + " && " + right->stringify();
+	} else {
+		return "\0";
+	}
+}
+
+
 void AndToken::setLeft(Token * l){
 	left = l;
 }

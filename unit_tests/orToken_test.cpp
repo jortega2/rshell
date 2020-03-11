@@ -14,6 +14,7 @@ TEST (orTokenTest, lsORechoSuccess){
 	CmdToken* right = new CmdToken ("echo success");
 	OrToken* test = new OrToken(left, right);
 	EXPECT_EQ(test->execute(), 1); 
+	EXPECT_EQ(test->stringify(), "ls || echo success");
 }
 
 TEST (orTokenTest, invalidORvalid){
@@ -22,6 +23,7 @@ TEST (orTokenTest, invalidORvalid){
         CmdToken* right = new CmdToken ("echo failure");
         OrToken* test = new OrToken(left, right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "ls -j || echo failure");
 }
 
 TEST (orTokenTest, validORinvalid){
@@ -30,6 +32,7 @@ TEST (orTokenTest, validORinvalid){
         CmdToken* right = new CmdToken ("echa ?");
         OrToken* test = new OrToken(left, right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "ls || echa ?");
 }
 
 TEST (orTokenTest, invalidORinvalid){
@@ -38,6 +41,7 @@ TEST (orTokenTest, invalidORinvalid){
         CmdToken* right = new CmdToken ("gers");
         OrToken* test = new OrToken(left, right);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "pog || gers");
 }
 
 TEST (orTokenTest, nestedOr){
@@ -48,6 +52,7 @@ TEST (orTokenTest, nestedOr){
 	OrToken* nested = new OrToken(left,right);
         OrToken* test = new OrToken(nested, right2);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "pwd || ls || pwd");
 }
 
 TEST (orTokenTest, doubleNestedOr){
@@ -59,6 +64,7 @@ TEST (orTokenTest, doubleNestedOr){
 	OrToken* nested2 = new OrToken(nested1, right2);
         OrToken* test = new OrToken(nested2, right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "pwd || ls || rm -rf zfolder || ls");
 }
 TEST (orTokenTest, validORkeyboardsmash){
 	// ls || adlakwjfaigjalkga
@@ -66,6 +72,7 @@ TEST (orTokenTest, validORkeyboardsmash){
         CmdToken* right = new CmdToken ("afiajgjf1jt1g");
         OrToken* test = new OrToken(left, right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "ls || afiajgjf1jt1g");
 }
 
 TEST (orTokenTest, emptyConnectorTest) {
@@ -75,6 +82,7 @@ TEST (orTokenTest, emptyConnectorTest) {
         test->setLeft(left);
         test->setRight(right);
         EXPECT_EQ(test->execute(), 1);
+	EXPECT_EQ(test->stringify(), "ls || pwd");
 }
 
 TEST (orTokenTest, EmptyNodeTest) {
@@ -82,6 +90,7 @@ TEST (orTokenTest, EmptyNodeTest) {
         OrToken* test = new OrToken();
         test->setLeft(left);
         EXPECT_EQ(test->execute(), 0);
+	EXPECT_EQ(test->stringify(), "");
 }
 
 #endif

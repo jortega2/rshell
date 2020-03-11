@@ -11,6 +11,7 @@ private:
 public:
 	AndToken(Token * l, Token * r);
 	AndToken();
+	virtual std::string stringify();
 	virtual void setLeft(Token * l);
 	virtual void setRight(Token * r);
 	virtual Token* getLeft();

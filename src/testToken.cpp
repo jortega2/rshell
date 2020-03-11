@@ -3,12 +3,17 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-
+//bug: dont ret 1 when directory not found?
 
 TestToken::TestToken(std::string input){
-	file = input;
+	file = arg = input;
 	this->parse();
 }
+
+std::string TestToken::stringify(){
+	return arg;
+}
+
 
 void TestToken::parse(){
 	boost::regex firstWord("^\\s*([\\w]+)");

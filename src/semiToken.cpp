@@ -10,6 +10,15 @@ SemiToken::SemiToken(){
 	right = nullptr;
 }
 
+std::string SemiToken::stringify(){
+	if (left != nullptr && right != nullptr){
+	        return left->stringify() + " ; " + right->stringify();
+	} else {
+		return "\0";
+	}
+}
+
+
 void SemiToken::setLeft(Token * l){
         left = l;
 }
