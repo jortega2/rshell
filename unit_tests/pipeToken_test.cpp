@@ -39,9 +39,31 @@ TEST (pipeTokenTest, greeksforgeeksNestedAlt){
 	PipeToken * two = new PipeToken(" | tee file2.txt", one);
 	PipeToken * test = new PipeToken(" | wc -l", two);
 	EXPECT_EQ(test->execute(), 1);
-	
+
 	//delete file2.txt (not needed)
 	CmdToken * cmd = new CmdToken("rm file2.txt");
 	cmd->execute();
 }
+
+TEST (pipeTokenTest, pipeIntoMissingDir) {
+        CmdToken * left = new CmdToken ("ls -l");
+        PipeToken * test = new PipeToken("| prototype/poggies", left);
+        EXPECT_EQ(test->execute(), 0);
+        EXPECT_EQ(test->stringify(), "ls -l | prototype/poggies");
+}
+
+TEST (pipeTokenTest, pipeIntoFileErrorCheck) {
+        CmdToken * left = new CmdToken ("ls -l");
+        PipeToken * test = new PipeToken("| prototype/something.txt", left);
+        EXPECT_EQ(test->execute(), 0);
+        EXPECT_EQ(test->stringify(), "ls -l | prototype/something.txt");
+}
+
+TEST (pipeTokenTest, invalidCmd) {
+        CmdToken * left = new CmdToken ("ls -j");
+        PipeToken * test = new PipeToken("| tr a-z A-Z", left);
+        EXPECT_EQ(test->execute(), 1);
+        EXPECT_EQ(test->stringify(), "ls -j | tr a-z A-Z");
+}
+
 #endif
