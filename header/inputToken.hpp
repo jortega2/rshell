@@ -1,20 +1,16 @@
-#ifndef __PIPETOKEN_HPP__
-#define __PIPETOKEN_HPP__
+#ifndef __INPUTTOKEN_HPP__
+#define __INPUTTOKEN_HPP__
 
 #include "Token.hpp"
-#include <string>
-#include <boost/regex.hpp>
 
-class PipeToken : public Token {
+class InputToken : public Token {
 	private:
-		std::string dir;
-		std::string arg;
 		Token* left;
 		Token* right;
 		int ret;
 	public:
-		PipeToken();
-		PipeToken(Token * r, Token * l);
+		InputToken(Token* l, Token* r);
+		InputToken();
 		virtual std::string stringify();
 		virtual int execute();
 		virtual int isLeaf();

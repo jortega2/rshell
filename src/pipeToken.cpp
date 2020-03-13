@@ -7,27 +7,30 @@
 #include <cstring>
 
 
-PipeToken::PipeToken(std::string input){
-	arg = input;
+PipeToken::PipeToken(){
+	right = nullptr;
+	left = nullptr;
 	//parse
-	boost::regex pip("(\\|)");
+	//shave white space
+	/*boost::regex pip("(\\|)");
 	boost::smatch symbol;
 	if (boost::regex_search(input, symbol, pip)){
 		input = symbol.suffix();
-	}
-	dir = input;
+	}*/
+	//dir = input;
 }
 
-PipeToken::PipeToken(std::string input, Token * l){
-	arg = input;
+PipeToken::PipeToken(Token * l, Token * r){
 	left = l;
+	right = r;
 	//parse
-	boost::regex pip("(\\|)");
-        boost::smatch symbol;
+	
+	right = r;boost::regex pip("(\\|)");
+        /*boost::smatch symbol;
         if (boost::regex_search(input, symbol, pip)){
                 input = symbol.suffix();
         }
-	dir = input;
+	dir = input;*/
 }
 
 int PipeToken::isLeaf(){
@@ -38,18 +41,20 @@ void PipeToken::setLeft(Token* l){
 	left = l;
 }
 
-void PipeToken::setRight(Token* r){}
+void PipeToken::setRight(Token * r){
+	right = r;
+}
 
 Token* PipeToken::getLeft(){
 	return left;
 }
 
 Token* PipeToken::getRight(){
-	return nullptr;
+	return right;
 }
 
 std::string PipeToken::stringify(){
-        return left->stringify() + " " + arg;
+        return left->stringify() + " | " + right->stringify();
 }
 
 
@@ -59,25 +64,23 @@ int PipeToken::execute(){
 	pid_t split = fork();
 
 	if (split == -1){
-		perror("fork failed, echck processes");
+		perror("fork failed, check processes");
 	}
 	if (split == 0){ 
 		std::string r = "r";
 		std::string w = "w";
-
+	
 		char buffer[PATH_MAX];
 		memset(buffer, '\0', 420);
 
 		FILE* in_pipe = popen(left->stringify().c_str(), r.c_str());
-		FILE* out_pipe  = popen(dir.c_str(), w.c_str()); 
+		FILE* out_pipe  = popen(right->stringify().c_str(), w.c_str()); 
 
 		if ((in_pipe != NULL) && (out_pipe != NULL)){
 			while (fgets(buffer,PATH_MAX, in_pipe) != NULL){
-				//std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 				fputs(buffer, out_pipe);
 			}
 			ret = 1;
-			//std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 		} else {
 			if (in_pipe == nullptr){
 				perror("in_pipe");
@@ -90,6 +93,7 @@ int PipeToken::execute(){
 		
 		pclose(in_pipe);
 		pclose(out_pipe);
+		std::cout << "\n\nret ret\n\n";
 		exit(1);
 	}
 	if (split > 0){

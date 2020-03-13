@@ -26,7 +26,7 @@ TEST (cmdTokenParse, HandlesWhiteSpace) {
         std::vector <std::string> expected {"ls", "-a"};
         CmdToken* test = new CmdToken("       ls         -a        ");
         EXPECT_EQ(test->returnVector(), expected);
-	EXPECT_EQ(test->stringify(), "       ls         -a        ");
+	EXPECT_EQ(test->stringify(), "ls         -a");
 }
 
 TEST (cmdTokenParse, HandlesQuotes) {

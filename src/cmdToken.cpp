@@ -25,6 +25,16 @@ int CmdToken::isLeaf() {
 }
 
 std::string CmdToken::stringify(){
+	boost::smatch ws1, ws2;
+
+	boost::regex leadingSpace("^[ \t]+");
+        boost::regex trailingSpace("[ \t]+$");
+	if (boost::regex_search(arg, ws1, leadingSpace)){
+                arg = ws1.suffix();
+        }
+        if (boost::regex_search(arg, ws2, trailingSpace)){
+                arg = ws2.prefix();
+        }
         return arg;
 }
 
