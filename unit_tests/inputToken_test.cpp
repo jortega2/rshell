@@ -5,28 +5,20 @@
 #include "../header/inputToken.hpp"
 #include "../header/cmdToken.hpp"
 
-/*TEST (inputTokenTest, genericCommmand) {
+TEST (inputTokenTest, genericCommmand) {
 	CmdToken * left =  new CmdToken("tr a-z A-Z");
 	CmdToken * right = new CmdToken("some.txt");
 	InputToken * test = new InputToken(left, right);
 	EXPECT_EQ(test->stringify(), "tr a-z A-Z < some.txt");
 	EXPECT_EQ(test->execute(), 1);
-}*/
-
-TEST (inputTokenTest, incorrectCommmand) {
-        CmdToken * left =  new CmdToken("poggers");
-        CmdToken * right = new CmdToken("some.txt");
-        InputToken * test = new InputToken(left, right);
-        EXPECT_EQ(test->stringify(), "poggers < some.txt");
-        EXPECT_EQ(test->execute(), 0);
 }
 
-/*TEST (inputTokenTest, MissingFile) {
+TEST (inputTokenTest, MissingFile) {
         CmdToken * left =  new CmdToken("tr a-z A-Z");
         CmdToken * right = new CmdToken("poggers");
         InputToken * test = new InputToken(left, right);
         EXPECT_EQ(test->stringify(), "tr a-z A-Z < poggers");
-        EXPECT_EQ(test->execute(), 0);
+        EXPECT_EQ(test->execute(), 1);
 }
 
 TEST (inputTokenTest, nestedCommand) {
@@ -36,8 +28,8 @@ TEST (inputTokenTest, nestedCommand) {
         InputToken * input = new InputToken(left, right);
 	InputToken * test = new InputToken(left2, input);
         EXPECT_EQ(test->stringify(), "sort < tr a-z A-Z < some.txt");
-        EXPECT_EQ(test->execute(), 0);
-}*/
+        EXPECT_EQ(test->execute(), 1);
+}
 
 
 #endif
