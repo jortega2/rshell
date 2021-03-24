@@ -6,7 +6,7 @@ Robert Rivera SID: 862086500
 # Introduction
 Our program will accomplish the following: print a command prompt, read in a line of command(s) and connector(s) from standard input, execute the appropriate commands using fork, stat, execvp, and waitpid, and repeat until an exit command is executed. The program is designed using composite design pattern, utilizing the following classes: Tokenizer, Executor, and Token which will have various subclasses. The client, R'Shell, will take a command input which will be used to instantiate a Tokenizer object. The Tokenzier object will parse and split the input using boost library with regex, and create a vector of type string with the input in prefix notation. The Tokenizer object will pass the string vector to an Executor object which will create a tree of Token*. Once the tree is created, the executor object can take advantage of polymorphism and execute the tree by executing the root Token.
 # Diagram
-![image of OMT diagram](https://raw.githubusercontent.com/jortega2/rshell/master/images/CS%20100%20Assignment%20OMT_%20Class%20Diagram.png?token=AIV3NNJ6QB6P3NKM7ZLZRQC6MM3MG)
+![image of OMT diagram](/images/ClassDiagram.png)
 # Classes
 **Abstract Token Class:**\
 This class will be used to define some common behavior that can be inherited by multiple subclasses. In this case, the multiple subclasses will be the different tokens rshell will use such as connectors and commands. The Token class has pure virtual functions execute, isLeaf, getLeft, getRight, setLeft and setRight.
