@@ -18,9 +18,7 @@ if(Boost_FOUND)
 	src/andToken.cpp
 	src/orToken.cpp
 	src/semiToken.cpp
-	src/testToken.cpp
-	src/pipeToken.cpp
-	src/inputToken.cpp)
+	src/testToken.cpp)
 	target_link_libraries(rshell ${Boost_LIBRARIES})
 	add_executable(test 
 	unit_tests/unit_tests.cpp
@@ -31,9 +29,7 @@ if(Boost_FOUND)
 	src/andToken.cpp
 	src/orToken.cpp
 	src/semiToken.cpp
-	src/testToken.cpp
-	src/pipeToken.cpp
-	src/inputToken.cpp)
+	src/testToken.cpp)
 	target_link_libraries(test ${Boost_LIBRARIES})
 endif()
 

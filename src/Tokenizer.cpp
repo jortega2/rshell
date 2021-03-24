@@ -58,7 +58,7 @@ void Tokenizer::parse(){
 	//delete empty arguments
 	for (int i = 0; i < temp.size(); i++){
         	int whitespace = 0;
-        	for (int j = 0; j <temp[i].size(); j++){
+        	for (int j = 0; j < temp[i].size(); j++){
             		if (isspace(temp[i][j])){
                   		whitespace++;
             		}
@@ -102,12 +102,12 @@ void Tokenizer::shuntingYardAlgorithm(){
                 }
         }
         for (int i = 0; i < temp.size(); i++){
-                std::cout << temp[i] << std::endl;
+               // std::cout << temp[i] << std::endl;
         }
 	
 
 	std::stack<std::string> myStack;
-        std::queue<std::string> myQueue;
+    std::queue<std::string> myQueue;
 
         for (int i = 0; i < temp.size(); i++){
                 if (temp[i] == "("){

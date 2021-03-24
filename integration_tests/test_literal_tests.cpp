@@ -45,7 +45,7 @@ TEST (TestLiteralTests, TwoTests){
 }
 
 TEST (TestLiteralTests, invalidExitCapilization){
-        Tokenizer * tokeniz = new Tokenizer("TEST ../rshell");
+        Tokenizer * tokeniz = new Tokenizer("TEST -e rshell");
 	tokeniz->parse();
         tokeniz->shuntingYardAlgorithm();
         Executor * exec = new Executor (tokeniz->returnArgs());
@@ -55,7 +55,7 @@ TEST (TestLiteralTests, invalidExitCapilization){
 }
 
 TEST (TestLiteralTests, edgeCaseWhiteSpaces){
-        Tokenizer * tokeniz = new Tokenizer("     test -e        .gitignore ;        test -d   ../assignment-jorr  &&          test -f           3");;
+        Tokenizer * tokeniz = new Tokenizer("     test -e        .gitignore ;        test -d   ../assignment-jorr  &&          test -f           3");
 	tokeniz->parse();
         tokeniz->shuntingYardAlgorithm();
         Executor * exec = new Executor (tokeniz->returnArgs());

@@ -7,8 +7,8 @@
 #include "semiToken_test.cpp"
 #include "Executor_test.cpp"
 #include "testToken_test.cpp"
-#include "pipeToken_test.cpp"
-#include "inputToken_test.cpp"
+//#include "pipeToken_test.cpp"
+//#include "inputToken_test.cpp"
 
 int main(int argc, char **argv) {
    ::testing::InitGoogleTest(&argc, argv);

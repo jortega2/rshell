@@ -43,3 +43,7 @@ prototype/commands_exec
 prototype/parse_exec
 Makefile
 cmake_install.cmake
+header/inputToken.hpp
+header/pipeToken.hpp
+src/inputToken.cpp
+src/pipeToken.cpp
