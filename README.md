@@ -43,5 +43,3 @@ The method of parsing we chose to use is boost library with regex. To get boost 
 
 **Connectors:**\
 While investigating the connector behavior, we found that a command shell reads the input from left to right, unless parenthesis are used. When || is used, the shell will execute the left side first, after which it may execute the right side but only if the left side failed. When using && the shell will attempt to execute both sides of the input but will stop if the left side fails. With the ; connector, it is similar to && but will attempt to execute even if the left side of the input fails. When using these three in conjunction, the shell reads the input from left to right and behaves as expected.
-# Development and Testing Roadmap
-1. Awaiting assigment 4
